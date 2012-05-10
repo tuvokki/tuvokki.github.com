@@ -1,0 +1,7 @@
+cd Developer/github/tuvokki.github.com
+#ruby --version
+rake generate
+rake deploy
+git add .
+git commit -m "Something else"
+git push origin source
