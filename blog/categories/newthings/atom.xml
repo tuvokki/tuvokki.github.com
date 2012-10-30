@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: newthings | My Octopress Blog]]></title>
+  <title><![CDATA[Category: newthings | tuvokki.github.com]]></title>
   <link href="http://tuvokki.github.com/blog/categories/newthings/atom.xml" rel="self"/>
   <link href="http://tuvokki.github.com/"/>
-  <updated>2012-10-30T14:57:58+01:00</updated>
+  <updated>2012-10-30T15:02:45+01:00</updated>
   <id>http://tuvokki.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Wouter Roosendaal]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
