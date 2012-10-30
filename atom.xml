@@ -4,7 +4,7 @@
   <title><![CDATA[tuvokki.github.com]]></title>
   <link href="http://tuvokki.github.com/atom.xml" rel="self"/>
   <link href="http://tuvokki.github.com/"/>
-  <updated>2012-10-30T19:48:01+01:00</updated>
+  <updated>2012-10-30T19:56:14+01:00</updated>
   <id>http://tuvokki.github.com/</id>
   <author>
     <name><![CDATA[Wouter Roosendaal]]></name>
@@ -35,7 +35,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[My Cool New Post]]></title>
+    <title type="html"><![CDATA[my cool new post]]></title>
     <link href="http://tuvokki.github.com/blog/2012/05/10/my-cool-new-post/"/>
     <updated>2012-05-10T22:31:00+02:00</updated>
     <id>http://tuvokki.github.com/blog/2012/05/10/my-cool-new-post</id>
@@ -45,12 +45,14 @@
 
 <p>October 25, 2006</p>
 
-<p>Welcome!! You are now at my blog!! I know it doesn’t look to cool… I justed made it! Well I’ll try to get some cool stuff.<a href="Source:">^1</a></p>
+<p>Welcome!! You are now at my blog!! I know it doesn’t look to cool… I justed made it! Well I’ll try to get some cool stuff.</p>
+
+<p>Source: <a href="http://mycoolblog.wordpress.com/">myCool Blog</a></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[This is something else]]></title>
+    <title type="html"><![CDATA[this is something else]]></title>
     <link href="http://tuvokki.github.com/blog/2012/05/10/this-is-something-else/"/>
     <updated>2012-05-10T21:47:00+02:00</updated>
     <id>http://tuvokki.github.com/blog/2012/05/10/this-is-something-else</id>
