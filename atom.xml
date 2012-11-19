@@ -4,7 +4,7 @@
   <title><![CDATA[tuvokki.github.com]]></title>
   <link href="http://tuvokki.github.com/atom.xml" rel="self"/>
   <link href="http://tuvokki.github.com/"/>
-  <updated>2012-11-18T21:34:24+01:00</updated>
+  <updated>2012-11-19T20:59:04+01:00</updated>
   <id>http://tuvokki.github.com/</id>
   <author>
     <name><![CDATA[Wouter Roosendaal]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rare event]]></title>
+    <link href="http://tuvokki.github.com/blog/2012/11/19/Rare_event/"/>
+    <updated>2012-11-19T20:45:00+01:00</updated>
+    <id>http://tuvokki.github.com/blog/2012/11/19/Rare_event</id>
+    <content type="html"><![CDATA[<h4>there has neven been ..</h4>
+
+<p>It is not uncommon that I predict change. Or that I announce it, even. But it is very rare that I follow up on such a lifechanging decision. Right now (look at the dates of this post and the previous), a rare event has happened. The result can be found here:</p>
+
+<p><a href="https://github.com/tuvokki/about">about</a> *A simple implementation of an about section for a Django website</p>
+
+<p>I really did something with my last post.</p>
+
+<p><img src="http://logo-city.org/data_images/4260/E76/40438.png" alt="image" /></p>
+
+<p>That&#8217;s great!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Restructuring, focus and vision]]></title>
