@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wouter Roosendaal</title>
+    <description>What are git?</description>
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Running Down the Hill</title>
+        <description>&lt;p&gt;So, this is what I wrote some time ago. Noone ever read it, even I forgot about it minutes after writing it. Furthermore, most of the things written here are not valid anymore. I still haven&amp;#39;t created a decent to-do-list app. The tournamentsoftware hit production at some point in time, but never really took off. And the picture project was a solution for a niche that never existed.&lt;/p&gt;
+
+&lt;h4&gt;Anyway, here&amp;#39;s the post of JAN 26TH, 2012&lt;/h4&gt;
+
+&lt;p&gt;As time goes by and thoughts materialize into memories written in code, some new stuff surfaces to various repositories. I tend to do things and never reflect on them. Never improve the code and only research until the proof-of-concept phase is done. After that nothing happens.&lt;/p&gt;
+
+&lt;h4&gt;Next item on the list is a todo-list that describes things to do on the list.&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;  Create a decent todo-list app
+
+&lt;ol&gt;
+&lt;li&gt; Enable users to add todo’s into the list for a specific app&lt;/li&gt;
+&lt;li&gt; add categories to the todo’s&lt;/li&gt;
+&lt;li&gt; automatically delete all bugs from the list with ‘cannot reproduce’ as reason&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;  poolratings: ELO based system for ranking players in an ongoing pool tournament at work.
+
+&lt;ol&gt;
+&lt;li&gt; add the possibility to delete or disable players&lt;/li&gt;
+&lt;li&gt; set winner on create game&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;  picture-project: convert a (set of) directories with pictures into a website showing them.
+
+&lt;ol&gt;
+&lt;li&gt; add tempting system&lt;/li&gt;
+&lt;li&gt; make settings and integrate them in templates&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;New entry in the list is a fork that creates a Django app. Lovely.&lt;/p&gt;
+
+&lt;p&gt;To work now.&lt;/p&gt;
+
+&lt;h4&gt;So, what&amp;#39;s new this time?&lt;/h4&gt;
+
+&lt;p&gt;Well, not new, but still going strong, is the intention to blog. This is an ongoing process, going on right now. But what else?&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s see. Three projects that are worth mentioning.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/TuvokVersatileKolinahr/Huna_Server&quot;&gt;Huna_Server&lt;/a&gt;
+hunaJS takes care of your errors. This project is done with my mate &lt;a href=&quot;https://github.com/elgervb&quot;&gt;Elger&lt;/a&gt;. An initiative to provide developers with a system to track clientside errors in webapps.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tuvokki/gitcontrol&quot;&gt;gitcontrol&lt;/a&gt;
+Provide some control over the git repos on a server without commandline access to it, created to control git-repo&amp;#39;s without having to create users on your production systems. Just a website with a button.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tuvokki/data-api&quot;&gt;data-api&lt;/a&gt;
+An API implementation usng PyMongo, Flask and Flask-Classy. A basic data api, now filled with the philosophical proverbs of Erik van W.&lt;/p&gt;
+
+&lt;h4&gt;Enough to do&lt;/h4&gt;
+
+&lt;p&gt;A nice bunch of things in stock. Coding is still passion, some things never change. &lt;/p&gt;
+</description>
+        <pubDate>Sat, 23 May 2015 00:00:00 +0200</pubDate>
+        <link>/Welcome-Once-Again/</link>
+        <guid isPermaLink="true">/Welcome-Once-Again/</guid>
+      </item>
+    
+  </channel>
+</rss>
