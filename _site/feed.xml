@@ -7,6 +7,14 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>What am I doing here</title>
+        <description></description>
+        <pubDate>Sun, 24 May 2015 00:00:00 +0200</pubDate>
+        <link>/What-am-I-doing-here/</link>
+        <guid isPermaLink="true">/What-am-I-doing-here/</guid>
+      </item>
+    
+      <item>
         <title>Running Down the Hill</title>
         <description>&lt;p&gt;So, this is what I wrote some time ago. Noone ever read it, even I forgot about it minutes after writing it. Furthermore, most of the things written here are not valid anymore. I still haven&amp;#39;t created a decent to-do-list app. The tournamentsoftware hit production at some point in time, but never really took off. And the picture project was a solution for a niche that never existed.&lt;/p&gt;
 
