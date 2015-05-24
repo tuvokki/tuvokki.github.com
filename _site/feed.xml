@@ -7,14 +7,6 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>What am I doing here</title>
-        <description></description>
-        <pubDate>Sun, 24 May 2015 00:00:00 +0200</pubDate>
-        <link>/What-am-I-doing-here/</link>
-        <guid isPermaLink="true">/What-am-I-doing-here/</guid>
-      </item>
-    
-      <item>
         <title>Running Down the Hill</title>
         <description>&lt;p&gt;So, this is what I wrote some time ago. Noone ever read it, even I forgot about it minutes after writing it. Furthermore, most of the things written here are not valid anymore. I still haven&amp;#39;t created a decent to-do-list app. The tournamentsoftware hit production at some point in time, but never really took off. And the picture project was a solution for a niche that never existed.&lt;/p&gt;
 
@@ -72,6 +64,115 @@ An API implementation usng PyMongo, Flask and Flask-Classy. A basic data api, no
         <pubDate>Sat, 23 May 2015 00:00:00 +0200</pubDate>
         <link>/Welcome-Once-Again/</link>
         <guid isPermaLink="true">/Welcome-Once-Again/</guid>
+      </item>
+    
+      <item>
+        <title>This is something else</title>
+        <description>&lt;p&gt;As a programmer I&amp;#39;d have to say that nothing ever happens. Period. So&amp;#39; I&amp;#39;m not going to say that anything that has happened, has not.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 May 2012 00:00:00 +0200</pubDate>
+        <link>/this-is-something-else/</link>
+        <guid isPermaLink="true">/this-is-something-else/</guid>
+      </item>
+    
+      <item>
+        <title>Switching and working</title>
+        <description>&lt;p&gt;A few things have changed. I actually added some content to this blog. Nothing worth mentioning, so if you stumbled across this post by accident you don&amp;#39;t have to bother reading the other posts, but it looks nice to have something of an archive.&lt;/p&gt;
+
+&lt;p&gt;I switched to the markdown editor &lt;a href=&quot;http://mouapp.com/&quot; title=&quot;Pretty great editor for markdown files&quot;&gt;Mou&lt;/a&gt;. &amp;quot;Mou The missing Markdown editor for web developers&amp;quot;. A brilliant editor that shows your markdown text on the left-hand side and the actual wysiwyg on the right.&lt;/p&gt;
+
+&lt;p&gt;Furthermore I switched to using &lt;a href=&quot;http://mac.github.com/&quot; title=&quot;GitHub for Mac&quot;&gt;GitHub for Mac&lt;/a&gt;. As they say themselves:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;At GitHub, we think that sharing code should be as simple as possible.&lt;/p&gt;
+
+&lt;h5&gt;That’s why we created GitHub for Mac.&lt;/h5&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There is a marvelous button with a nice Apple-logo and the message &amp;#39;Clone in Mac&amp;#39; at the top of any github-repository which automatically links to this application. I can manage my own repositories on my local disk without hassle and as a mac-user I love a good graphical interface.&lt;/p&gt;
+
+&lt;p&gt;Next? Some actual productivity? Who knows? :)&lt;/p&gt;
+
+&lt;p&gt;For now I&amp;#39;ll just close with:
+    rake generate &amp;amp;&amp;amp; rake deploy&lt;/p&gt;
+</description>
+        <pubDate>Sun, 29 Jan 2012 00:00:00 +0100</pubDate>
+        <link>/switching_and_working/</link>
+        <guid isPermaLink="true">/switching_and_working/</guid>
+      </item>
+    
+      <item>
+        <title>Running down the hill</title>
+        <description>&lt;p&gt;As time goes by and thoughts materialize into memories written in code, some new stuff surfaces to various repositories. I tend to do things and never reflect on them. Never improve the code and only research until the proof of conceptphase is done. After that nothing happens.&lt;/p&gt;
+
+&lt;h4&gt;Next item on the list is a todo-list that describes things to do on the list.&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a decent todo-list app
+
+&lt;ol&gt;
+&lt;li&gt;Enable users to add todo&amp;#39;s into the list for a specific app&lt;/li&gt;
+&lt;li&gt;add categories to the todo&amp;#39;s&lt;/li&gt;
+&lt;li&gt;automatically delete all bugs from the list with &amp;#39;cannot reproduce&amp;#39; as reason&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;poolratings: ELO based system for ranking players in an ongoing pool tournament at work.
+
+&lt;ol&gt;
+&lt;li&gt;add the possibility to delete or disable players&lt;/li&gt;
+&lt;li&gt;set winner on create game&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;picture-project: convert a (set of) directories with pictures into a website showing them.
+
+&lt;ol&gt;
+&lt;li&gt;add tempting system&lt;/li&gt;
+&lt;li&gt;make settings and integrate them in templates&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;New entry in the list is a fork that creates a Django app. Lovely.&lt;/p&gt;
+
+&lt;p&gt;To work now.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 26 Jan 2012 00:00:00 +0100</pubDate>
+        <link>/running-down-the-hill/</link>
+        <guid isPermaLink="true">/running-down-the-hill/</guid>
+      </item>
+    
+      <item>
+        <title>What I didn&#39;t tell you</title>
+        <description>&lt;p&gt;So this is just a test. But as tests go by it can always evolve into something useful.&lt;/p&gt;
+
+&lt;p&gt;I managed to get the template as boring as they get, using only grey as &amp;#39;color&amp;#39;, with a nice list of repositories on the side an a tweet button below the posts. Also I list my recent tweets here. &lt;/p&gt;
+
+&lt;p&gt;Brilliant and simple.&lt;/p&gt;
+
+&lt;p&gt;Now what to do? Just post a nice quote from Moby Dik here:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;Better sleep with a sober cannibal than a drunken Christian.
+
+MOBY DICK, Chapter III
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Wed, 04 Jan 2012 00:00:00 +0100</pubDate>
+        <link>/what-i-didnt-tell-you/</link>
+        <guid isPermaLink="true">/what-i-didnt-tell-you/</guid>
+      </item>
+    
+      <item>
+        <title>A new perspective on old posts</title>
+        <description>&lt;p&gt;There is no way of telling why I do this every time. This must be CMS/Blogging system number 100 or more I have tried. Maybe I should do something with that passion. Anyway, I have installed Octopress and I am writing my first blog right now.&lt;/p&gt;
+
+&lt;h2&gt;Markdown&lt;/h2&gt;
+
+&lt;p&gt;Using markdown is easy for a hacker like me. Also I like to edit my fies in vim, zo using this via the command-line is really easy.&lt;/p&gt;
+
+&lt;h2&gt;Enough&lt;/h2&gt;
+
+&lt;h3&gt;lets post!&lt;/h3&gt;
+
+&lt;p&gt;Bye now.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Jan 2012 00:00:00 +0100</pubDate>
+        <link>/a-new-perspective-on-old-posts/</link>
+        <guid isPermaLink="true">/a-new-perspective-on-old-posts/</guid>
       </item>
     
   </channel>
