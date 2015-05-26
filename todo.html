@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<script src="http://code.angularjs.org/1.2.6/angular.min.js"></script>
+<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+
+    
+<body ng-controller="DemoCtrl" class="container"  ng-app="DemoApp">
+
+<h2>Realtime ToDo list with AngularJS and AngularFire</h2>
+<h4>Try it opening two browsers and adding / removing a TODO</h4>
+
+
+ <!--ADD ITEM FORM-->
+ <form name="myForm">
+
+     <div>
+         <input type="text"
+                name="todoNameField"
+                ng-model="todoName"
+                placeholder="Add new task (min 3 chars)"
+                required ng-minlength="3"
+                class="form-control"
+                ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
+                style="margin-bottom: 10px"
+                />
+
+         <button ng-click="addItem()"
+                         ng-hide="myForm.todoNameField.$invalid"
+                         class="btn btn-primary" type="button"
+                         >Save Todo</button>
+     </div>
+
+ </form>
+
+<hr>
+
+
+<!--TODO LIST-->
+<div ng-repeat="item in todos" class=" list-group-item row">
+
+    <div  class="col-md-6">
+        <!--COMPLETED ICON-->
+         <span class="glyphicon glyphicon-thumbs-up"
+               ng-show="item.completed"> </span>
+
+
+        <!--todo label-->
+        <span>{{item.name}} </span>
+
+        <small  class="text-warning"> [ {{item.id}} ]</small>
+    </div>
+
+
+    <div  class="col-md-6">
+        <!--Delete Todo button-->
+        <a class="btn btn-danger" ng-click="removeItem($index, item, $event)">
+            <i class="icon-remove-sign"></i>Delete
+        </a>
+
+        <a class="btn btn-warning" ng-click="changeStatus(item)">
+            <i class="icon-remove-sign"></i>Change Status
+        </a>
+    </div>
+
+
+</div>
