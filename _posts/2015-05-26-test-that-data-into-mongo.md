@@ -3,8 +3,6 @@ layout: post
 title: Test that data into Mongo
 ---
 
-#Test that data into Mongo
-
 I'm currently using a test in my Python project to get some data into my Mongo DB. I like it this way, since a unit-test to do such a thing comes in handy in two ways.
 
 * get you project started initially
