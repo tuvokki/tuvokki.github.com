@@ -44,6 +44,7 @@ A while ago I started with [an API implementation usng PyMongo, Flask and Flask-
 and a whole bunch more ([see](https://github.com/tuvokki/data-api/blob/master/mongo_add_quotes_to_db.py)) ...
 
 {% highlight python %}
+
 	      {
 	        'text': "The more future to come, the more customers to satisfy",
 	        'who': "Erik van Wunnik"
