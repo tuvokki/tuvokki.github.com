@@ -9,6 +9,9 @@ function DemoCtrl($scope, $firebase, FIREBASE_URL) {
     var todosRef = new Firebase(FIREBASE_URL);
     $scope.todos = $firebase(todosRef);
 
+    $scope.testItems = function() {
+      console.log("$scope.todos", $scope.todos);
+    }
 
     // Update the "completed" status
     $scope.changeStatus   = function (item) {
