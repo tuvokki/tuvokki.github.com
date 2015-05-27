@@ -17,6 +17,7 @@ And when your new hipster product is ready to be deployed? When it is matured en
 ##Example
 A while ago I started with [an API implementation usng PyMongo, Flask and Flask-Classy](https://github.com/tuvokki/data-api). So I needed to have some data in my project. I wrote the following unit-test:
 
+{% highlight python %}
     import unittest
 	from pymongo import MongoClient
 	
@@ -38,8 +39,11 @@ A while ago I started with [an API implementation usng PyMongo, Flask and Flask-
 	        'text': "Since there is absolutely no logical reason to assume there is an afterlife, I decided to make the life I have now as much fun as possible.",
 	        'who': "Erik van Wunnik"
 	      },
+{% endhighlight %}
+
 and a whole bunch more ([see](https://github.com/tuvokki/data-api/blob/master/mongo_add_quotes_to_db.py)) ...
 
+{% highlight python %}
 	      {
 	        'text': "The more future to come, the more customers to satisfy",
 	        'who': "Erik van Wunnik"
@@ -54,6 +58,7 @@ and a whole bunch more ([see](https://github.com/tuvokki/data-api/blob/master/mo
 	
 	suite = unittest.TestLoader().loadTestsFromTestCase(TestMongoInsertFunctions)
 	unittest.TextTestRunner(verbosity=2).run(suite)
+{% endhighlight %}
 
 To run this, just execute this test and you'll have all these (and more) quotes in your database. Also you have some insight in how to use Mongo from Python. And you just do this same trick when you want to go to another box, platform or stack you want to migrate to.
 
