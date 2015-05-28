@@ -1,6 +1,7 @@
 ---
 title: Let's make blogs!
 layout: post
+published: false
 ---
 Its fun to make blogs. They have anything a developer can wish for, minus the complexity of a multilayered enterprise application with a lot of legacy code. Developers heaven consists of a data-layer with some cross references between entities, a server-component that CRUDs this data and spits out readable messages to a front-end in a modern, HTML5, coat making your user happy.
 
