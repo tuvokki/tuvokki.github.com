@@ -83,3 +83,13 @@ Install the prerequisites we've been talking about:
 
 This is the clean slate we're building on. So we'll do a `git add .` and a `git commit -a -m 'initial commit'` to baseline this stuff.
 
+To keep things simple, we're going to only tackle basic functionality. Our blog application will support the following methods:
+
+ - Create a new post `(POST /posts)`
+ - Show a list of all the posts `(GET
+   /posts)`
+ - Show a single post `(GET /posts/:id)`
+ - Comment on a post `(POST
+   /posts/:id/comments)`
+   
+   
