@@ -162,7 +162,7 @@ router.get('/', function(req, res) {
 });
 {% endhighlight %}
 
-And all we have to do is add an index to render it all.
+And all we have to do is add an index to render it all. Save index.html in the view folder, and make it render the description we pass into it
 
 {% highlight html %}
 <p>
