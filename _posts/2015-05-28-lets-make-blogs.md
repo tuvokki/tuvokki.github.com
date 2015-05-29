@@ -100,9 +100,8 @@ Our blog application will only support CRUD methods:
  - Comment on a post `(POST
    /posts/:id/comments)`
    
-   Let's start with a basic layout for our application. By convention, Bogart's view engine uses a file called layout.html as the layout if it exists. A Bogart layout is a template with a {{{body}}} tag to include the view inside of the layout.
+   Let's start with a basic layout for our application. By convention, Bogart's view engine uses a file called layout.html as the layout if it exists. A Bogart layout is a template with a {{{body}}} tag to include the view inside of the layout. Make a folder called `views` in the main folder of the projects and create layout.html
 
-layout.html
 {% highlight html %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -136,3 +135,17 @@ app.use(router); // Our router
 
 app.start(9981);
 {% endhighlight %}
+
+This will start a server on port `9981`:
+
+    % nodemon app.js 
+    29 May 22:36:38 - [nodemon] v1.2.1
+    29 May 22:36:38 - [nodemon] to restart at any time, enter `rs`
+    29 May 22:36:38 - [nodemon] watching: *.*
+    29 May 22:36:38 - [nodemon] starting `node app.js`
+    util.puts: Use console.log instead
+    Server running on port 9981
+   
+   We can open this in our browser [http://localhost:9981/](http://localhost:9981/) to see what happens. And guess what? We, and the whole world with us, is welcomed. Do you feel that? To make it special add a name [http://localhost:9981/tuvokki](http://localhost:9981/tuvokki) in the mix.
+
+Adding the following will make our system ready for the layout we just created.
