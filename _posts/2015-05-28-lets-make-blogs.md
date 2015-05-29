@@ -91,6 +91,8 @@ And on this baseline we'll build a simple system.
 > direction.
 >  - E. F. Schumacher
 
+##The components
+
 Our blog application will only support CRUD methods:
 
  - Create a new post `(POST /posts)`
