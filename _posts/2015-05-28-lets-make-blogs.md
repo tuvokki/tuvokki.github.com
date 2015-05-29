@@ -1,7 +1,7 @@
 ---
 title: Let's make blogs!
 layout: post
-published: false
+published: true
 ---
 Its fun to make blogs. They have anything a developer can wish for, minus the complexity of a multilayered enterprise application with a lot of legacy code. Developers heaven consists of a data-layer with some cross references between entities, a server-component that CRUDs this data and spits out readable messages to a front-end in a modern, HTML5, coat making your user happy.
 
@@ -18,11 +18,11 @@ I mean, that would make a ...
 ##Lovely combination
 To start this we'll have to do two things. Create a repo to dump this in. So, head over to your [github](https://github.com) account and create a new repo. I called mine [bogart-blog](https://github.com/tuvokki/bogart-blog). Let's check it out:
 
-    % cd development/projects                                                                                                                               % git clone git@github.com:tuvokki/bogart-blog.git
-    Cloning into 'bogart-blog'...
-    warning: You appear to have cloned an empty repository.
-    Checking connectivity... done.
-    % cd bogart-blog 
+    % cd development/projects                                                                                                                                 % git clone git@github.com:tuvokki/bogart-blog.git
+        Cloning into 'bogart-blog'...
+        warning: You appear to have cloned an empty repository.
+        Checking connectivity... done.
+        % cd bogart-blog 
 
 Now, we can make a project:
 
@@ -84,7 +84,14 @@ Install the prerequisites we've been talking about:
 
 This is the clean slate we're building on. So we'll do a `git add .` and a `git commit -a -m 'initial commit'` to baseline this stuff.
 
-To keep things simple, we're going to only tackle basic functionality. Our blog application will support the following methods:
+And on this baseline we'll build a simple system. 
+
+> Any intelligent fool can make things bigger and more complex... It
+> takes a touch of genius - and a lot of courage to move in the opposite
+> direction.
+>  - E. F. Schumacher
+
+Our blog application will only support CRUD methods:
 
  - Create a new post `(POST /posts)`
  - Show a list of all the posts `(GET
@@ -93,4 +100,19 @@ To keep things simple, we're going to only tackle basic functionality. Our blog 
  - Comment on a post `(POST
    /posts/:id/comments)`
    
-   
+   Let's start with a basic layout for our application. By convention, Bogart's view engine uses a file called layout.html as the layout if it exists. A Bogart layout is a template with a {{{body}}} tag to include the view inside of the layout.
+
+layout.html
+{% highlight html %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+  <title>{{title}}</title>
+</head>
+<body>
+  {{{body}}}
+</body>
+</html>
+{% endhighlight %}
+
