@@ -154,7 +154,7 @@ Adding the following will make our system ready for the layout we just created.
 var viewEngine = bogart.viewEngine('mustache', path.join(bogart.maindir(), 'views'));
 {% endhighlight %}
 
-And change the `/` route to use that view
+Ps. don't forget to add a reference to the path module in your app.js and change the `/` route to use our view
 
 {% highlight javascript %}
 router.get('/', function(req, res) {
@@ -162,10 +162,12 @@ router.get('/', function(req, res) {
 });
 {% endhighlight %}
 
-And all we have to do is add an index to render it all. Save index.html in the view folder, and make it render the description we pass into it
+And all we have to do is add an index to render it all. Save index.html in the view folder, and make it render the description ('this is content') we pass into it
 
 {% highlight html %}
 <p>
 {{ "{{ description "}}}}
 </p>
 {% endhighlight %}
+
+Now check [http://localhost:9981/](http://localhost:9981/) again and voila, there we have a HTML5 powered message coming from our back-end. The only thing left is hook up this CouchDB and we have a blog. But that's work left for part two of this series.
