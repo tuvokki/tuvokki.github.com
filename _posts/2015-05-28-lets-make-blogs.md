@@ -103,7 +103,7 @@ Our blog application will only support CRUD methods:
    Let's start with a basic layout for our application. By convention, Bogart's view engine uses a file called layout.html as the layout if it exists. A Bogart layout is a template with a {{{body}}} tag to include the view inside of the layout.
 
 layout.html
-{% highlight jade %}
+{% highlight html %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
@@ -116,3 +116,23 @@ layout.html
 </html>
 {% endhighlight %}
 
+Next up is the basics of our webserver. Bogart has routing, as I already told before, so lets use it for something that works, and forget about this HTML above.
+
+{% highlight javascript %}
+var bogart = require('bogart');
+
+var router = bogart.router();
+router.get('/', function(req) { 
+      return "hello world"; 
+});
+
+router.get('/:name', function(req) {
+      return 'hello '+req.params.name;
+});
+
+var app = bogart.app();
+app.use(bogart.batteries({ secret: 'xGljGo7f4g/a1QveU8VRxhZP5Hwi2YWelejBq5h4ynM'})); // A batteries included JSGI stack including streaming request body parsing, session, flash, and much more.
+app.use(router); // Our router
+
+app.start(9981);
+{% endhighlight %}
