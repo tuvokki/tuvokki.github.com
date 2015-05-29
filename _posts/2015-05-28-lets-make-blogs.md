@@ -149,3 +149,23 @@ This will start a server on port `9981`:
    We can open this in our browser [http://localhost:9981/](http://localhost:9981/) to see what happens. And guess what? We, and the whole world with us, is welcomed. Do you feel that? To make it special add a name [http://localhost:9981/tuvokki](http://localhost:9981/tuvokki) in the mix.
 
 Adding the following will make our system ready for the layout we just created.
+
+{% highlight javascript %}
+var viewEngine = bogart.viewEngine('mustache', path.join(bogart.maindir(), 'views'));
+{% endhighlight %}
+
+And change the `/` route to use that view
+
+{% highlight javascript %}
+router.get('/', function(req, res) {
+  return viewEngine.respond('index.html', { locals: { description: 'This is content' } });
+});
+{% endhighlight %}
+
+And all we have to do is add an index to render it all.
+
+{% highlight html %}
+<p>
+{{ "{{ description "}}}}
+</p>
+{% endhighlight %}
