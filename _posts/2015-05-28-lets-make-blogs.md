@@ -18,7 +18,9 @@ I mean, that would make a ...
 ##Lovely combination
 To start this we'll have to do two things. Create a repo to dump this in. So, head over to your [github](https://github.com) account and create a new repo. I called mine [bogart-blog](https://github.com/tuvokki/bogart-blog). Let's check it out:
 
-    % cd development/projects                                                                                                                                 % git clone git@github.com:tuvokki/bogart-blog.git
+    % cd development/projects
+    
+    % git clone git@github.com:tuvokki/bogart-blog.git
         Cloning into 'bogart-blog'...
         warning: You appear to have cloned an empty repository.
         Checking connectivity... done.
