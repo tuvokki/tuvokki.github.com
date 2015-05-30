@@ -39,7 +39,6 @@ Use `npm install <pkg> --save` afterwards to install a package and
 save it as a dependency in the package.json file.
 
 
-    Press ^C at any time to quit.
     name: (bogart-blog) 
     version: (1.0.0) 0.0.1
     description: A blog created with bogart and couchdb
@@ -49,33 +48,7 @@ save it as a dependency in the package.json file.
     keywords: bogart, blog, couchdb
     author: Wouter Roosendaal
     license: (ISC) MIT
-    About to write to /Users/wouter/development/projects/bogart-blog/package.json:
-    
-    {
-      "name": "bogart-blog",
-      "version": "0.0.1",
-      "description": "A blog created with bogart and couchdb",
-      "main": "app.js",
-      "scripts": {
-        "test": "mocha"
-      },
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/tuvokki/bogart-blog.git"
-      },
-      "keywords": [
-        "bogart",
-        "blog",
-        "couchdb"
-      ],
-      "author": "Wouter Roosendaal",
-      "license": "MIT",
-      "bugs": {
-        "url": "https://github.com/tuvokki/bogart-blog/issues"
-      },
-      "homepage": "https://github.com/tuvokki/bogart-blog#readme"
-    }
-    
+	...    
     
     Is this ok? (yes) yes
 Tuck in a readme `echo "My bogart blog with CouchDB" > README.md` et voila. 
