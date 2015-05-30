@@ -8,7 +8,7 @@ Its fun to make blogs. They have anything a developer can wish for, minus the co
 And it always helps a lot if that user is ... you! Mainly because development takes place in yet another cool new framework and the end product is not intended for particular usage anywhere. So, what are we waiting for? Go, go, go!
 
 ##Bogart
-Bogart is a fast, Sinatra-Inspired JavaScript Framework running on JSGI with Node.JS! If that is not enough to convince you to start using it, routing in Bogart is simple and intuitive. A route is an HTTP method paired with an URL matching pattern and a handler function. It also handles redirects, CORS headers and file streaming. Today we'll see if this promising framework can live up to its expectations.
+Bogart is a fast, Sinatra-Inspired JavaScript Framework running on JSGI with Node.JS! If that is not enough to convince you to start using it, routing in Bogart is simple and intuitive. A route is an HTTP method paired with an URL matching pattern and a handler function. It also handles redirects, CORS headers and file streaming. In this series of blogs we'll see if this promising framework can live up to its expectations.
 
 ##CouchDB
 CouchDB is a database that completely embraces the web. Store your data with JSON documents. Access your documents and query your indexes with your web browser, via HTTP. Index, combine, and transform your documents with JavaScript. CouchDB works well with modern web and mobile apps. You can even serve web apps directly out of CouchDB. And you can distribute your data, or your apps, efficiently using CouchDB’s incremental replication. CouchDB supports master-master setups with automatic conflict detection.
