@@ -23,8 +23,8 @@ To start this we'll have to do two things. Create a repo to dump this in. So, he
     % git clone git@github.com:tuvokki/bogart-blog.git
         Cloning into 'bogart-blog'...
         warning: You appear to have cloned an empty repository.
-        Checking connectivity... done.
-        % cd bogart-blog 
+
+    % cd bogart-blog 
 
 Now, we can make a project:
 
