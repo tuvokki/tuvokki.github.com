@@ -51,7 +51,7 @@ save it as a dependency in the package.json file.
 	...    
     
     Is this ok? (yes) yes
-Tuck in a readme `echo "My bogart blog with CouchDB" > README.md` et voila. 
+See the resulting [package.json](https://github.com/tuvokki/bogart-blog/blob/master/package.json) in the repo I just created. Tuck in a readme `echo "My bogart blog with CouchDB" > README.md` et voila. 
 Install the prerequisites we've been talking about:
 
     npm install --save bogart
