@@ -18,17 +18,22 @@ I mean, that would make a ...
 ##Lovely combination
 To start this we'll have to do two things. Create a repo to dump this in. So, head over to your [github](https://github.com) account and create a new repo. I called mine [bogart-blog](https://github.com/tuvokki/bogart-blog). Let's check it out:
 
-    % cd development/projects
-    
-    % git clone git@github.com:tuvokki/bogart-blog.git
-        Cloning into 'bogart-blog'...
-        warning: You appear to have cloned an empty repository.
+```bash
+% cd development/projects
 
-    % cd bogart-blog 
+% git clone git@github.com:tuvokki/bogart-blog.git
+    Cloning into 'bogart-blog'...
+    warning: You appear to have cloned an empty repository.
+
+% cd bogart-blog 
+```
 
 Now, we can make a project:
 
-    % npm init
+```bash
+% npm init
+```
+
 This utility will walk you through creating a package.json file.
 It only covers the most common items, and tries to guess sensible defaults.
 
@@ -55,8 +60,10 @@ save it as a dependency in the package.json file.
 Tuck in a readme `echo "My bogart blog with CouchDB" > README.md` et voila. 
 Install the prerequisites we've been talking about:
 
-    npm install --save bogart
-    npm install --save couchdb
+```bash
+npm install --save bogart
+npm install --save couchdb
+```
 
 This is the clean slate we're building on. So we'll do a `git add .` and a `git commit -a -m 'initial commit'` to baseline this stuff.
 
@@ -118,15 +125,17 @@ app.start(9981);
 
 This will start a server on port `9981`:
 
-    % nodemon app.js 
-    29 May 22:36:38 - [nodemon] v1.2.1
-    29 May 22:36:38 - [nodemon] to restart at any time, enter `rs`
-    29 May 22:36:38 - [nodemon] watching: *.*
-    29 May 22:36:38 - [nodemon] starting `node app.js`
-    util.puts: Use console.log instead
-    Server running on port 9981
+```bash
+% nodemon app.js 
+29 May 22:36:38 - [nodemon] v1.2.1
+29 May 22:36:38 - [nodemon] to restart at any time, enter `rs`
+29 May 22:36:38 - [nodemon] watching: *.*
+29 May 22:36:38 - [nodemon] starting `node app.js`
+util.puts: Use console.log instead
+Server running on port 9981
+```
    
-   We can open this in our browser [http://localhost:9981/](http://localhost:9981/) to see what happens. And guess what? We, and the whole world with us, is welcomed. Do you feel that? To make it special add a name [http://localhost:9981/tuvokki](http://localhost:9981/tuvokki) in the mix.
+We can open this in our browser [http://localhost:9981/](http://localhost:9981/) to see what happens. And guess what? We, and the whole world with us, is welcomed. Do you feel that? To make it special add a name [http://localhost:9981/tuvokki](http://localhost:9981/tuvokki) in the mix.
 
 Adding the following will make our system ready for the layout we just created.
 
