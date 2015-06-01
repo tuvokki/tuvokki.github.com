@@ -2,7 +2,9 @@
 layout: post
 title: "Switching and working"
 ---
-A few things have changed. I actually added some content to this blog. Nothing worth mentioning, so if you stumbled across this post by accident you don't have to bother reading the other posts, but it looks nice to have something of an archive.
+I actually added some content to this blog. Nothing worth mentioning, so if you stumbled across this post by accident you don't have to bother reading the other posts.
+
+A few things have changed. Maybe it would look nice to have something of an archive.
 
 I switched to the markdown editor [Mou](http://mouapp.com/ "Pretty great editor for markdown files"). "Mou The missing Markdown editor for web developers". A brilliant editor that shows your markdown text on the left-hand side and the actual wysiwyg on the right.
 

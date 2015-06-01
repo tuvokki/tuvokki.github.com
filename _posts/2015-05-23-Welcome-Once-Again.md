@@ -1,9 +1,11 @@
 ---
 layout: post
-title: Running Down the Hill
+title: Welcome once Again
 ---
 
-So, this is what I wrote some time ago. Noone ever read it, even I forgot about it minutes after writing it. Furthermore, most of the things written here are not valid anymore. I still haven't created a decent to-do-list app. The tournamentsoftware hit production at some point in time, but never really took off. And the picture project was a solution for a niche that never existed.
+So, this is what I wrote some time ago. Noone ever read it, even I forgot about it minutes after writing it. Furthermore, most of the things written here are not valid anymore.
+
+I still haven't created a decent to-do-list app. The tournamentsoftware hit production at some point in time, but never really took off. And the picture project was a solution for a niche that never existed.
 
 ####Anyway, here's the post of JAN 26TH, 2012
 

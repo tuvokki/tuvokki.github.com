@@ -2,7 +2,9 @@
 layout: post
 title: "Running down the hill"
 ---
-As time goes by and thoughts materialize into memories written in code, some new stuff surfaces to various repositories. I tend to do things and never reflect on them. Never improve the code and only research until the proof of conceptphase is done. After that nothing happens.
+As time goes by and thoughts materialize into memories written in code, some new stuff surfaces to various repositories. I tend to do things and never reflect on them.
+
+Never improve the code and only research until the proof of conceptphase is done. After that nothing happens.
 
 #### Next item on the list is a todo-list that describes things to do on the list.
 * Create a decent todo-list app
