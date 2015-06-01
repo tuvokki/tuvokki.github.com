@@ -23,3 +23,12 @@ and, of course, create the directory itself.
 The directory should look something like this now:
 
 ![Dirlisting of our project](/images/posts/Lets-make-more-blogs-dirlist.png)
+
+In this `public`-folder we canput all stuff that needs to be in or site, but needs not be processed. Like css. So we'll create a css subfolder in it and a nice stylesheet called `site.css` (just grab it from here /*TODO: insert link to site.css*/), and use it in our `layout.html` like this
+
+```html
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+```
