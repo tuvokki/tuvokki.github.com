@@ -38,9 +38,9 @@ At this point we still have nothing even remotely resembling a blog. So lets upd
 
 ```html
 <article role="main">
-  <h1>{{ title }}</h1>
+  <h1>{{ "{{ title "}}}}</h1>
   <p>
-  {{ body }}
+  {{ "{{ body "}}}}
   </p>
 </article>
 ```
@@ -49,5 +49,70 @@ In `app.js` we'll have to match the mustaches required here
 
 ```javascript
 var article = { locals: { title: "first blog", body: "blog body" } };
+```
+
+But that' not data! We must hook up the couchdb. There are two routes that we will need in order to create a post.
+
+- `GET /posts/new` -> returns a form to create a new post
+- `POST /posts` -> creates a new post from the form parameters provided
+
+The mustache template to create a new post is as follows
+
+```html
+<form method='post' action='/posts'>
+  <fieldset>
+    <legend>New Post</legend>
+
+    <div>
+      <label for='title'>Title</label>
+      <input name='title' />
+    </div>
+
+    <div>
+      <label for='body'>Body</label>
+      <textarea name='body' rows='15' columns='25'></textarea>
+    </div>
+
+    <div class='buttons'>
+      <input type='submit' value='Save Post' />
+    </div>
+  </fieldset>
+</form>
+```
+
+And for this form we'll make a route
+
+```javascript
+router.get('/posts/new', function(req) {
+  return viewEngine.respond('new-post.html', {
+    locals: {
+      title: 'New Post'
+    }
+  })
+});
+```
+
+this will render the form and post to the `/posts` route. All we need is something to listen to this. It's time to set up the couchdb. Add a requirement to the couch in `app.js`. To do so head over to [nano](https://github.com/dscape/nano) and/or install via npm
+
+```bash
+npm install --save nano
+```
+
+require it
+
+```javascript
+var nano = require('nano')('https://couchdb-f0fd27.smileupps.com');
+```
+
+to create a new database:
+
+```javascript
+//nano.db.create('alice'); done this already in https://couchdb-f0fd27.smileupps.com/_utils/fauxton/
+```
+
+and to use it:
+
+```javascript
+var articles = nano.db.use('articles');
 ```
 
