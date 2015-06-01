@@ -21,4 +21,5 @@ app.use(bogart.middleware.directory(root));
 and, of course, create the directory itself.
 
 The directory should look something like this now:
+
 ![Dirlisting of our project](/images/posts/Lets-make-more-blogs-dirlist.png)
