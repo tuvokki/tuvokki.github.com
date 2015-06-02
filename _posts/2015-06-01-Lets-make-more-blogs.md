@@ -132,9 +132,9 @@ router.post('/posts', function(req) {
     }
     console.log('you have inserted the body: ', body)
     console.log(body);
-    return bogart.redirect('/posts');
   });
-}
+  return bogart.redirect('/posts');
+});
 ```
 
  It will insert your post in the articles database and redirect your user to the /posts url. Which does not exist yet.
