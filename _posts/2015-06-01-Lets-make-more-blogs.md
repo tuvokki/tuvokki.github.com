@@ -30,7 +30,7 @@ In this `public`-folder we canput all stuff that needs to be in or site, but nee
 ```html
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="css/site.css">
+  <link rel="stylesheet" type="text/css" href="/css/site.css">
 ```
 
 ##Where's the data?
@@ -48,7 +48,7 @@ At this point we still have nothing even remotely resembling a blog. So lets upd
 In `app.js` we'll have to match the mustaches required here
 
 ```javascript
-var article = { locals: { title: "first blog", body: "blog body" } };
+var article = { locals: { title: "header title", body: "A body that consists of a lot of things." } };
 ```
 
 But that' not data! We must hook up the couchdb. There are two routes that we will need in order to create a post.
@@ -59,7 +59,7 @@ But that' not data! We must hook up the couchdb. There are two routes that we wi
 The mustache template to create a new post is as follows
 
 ```html
-<form method='post' action='/posts'>
+<form method='post' action='/posts' class='articleform'>
   <fieldset>
     <legend>New Post</legend>
 
@@ -70,11 +70,11 @@ The mustache template to create a new post is as follows
 
     <div>
       <label for='body'>Body</label>
-      <textarea name='body' rows='15' columns='25'></textarea>
+      <textarea name='body' rows='30' columns='125'></textarea>
     </div>
 
     <div class='buttons'>
-      <input type='submit' value='Save Post' />
+      <button>Save</button>
     </div>
   </fieldset>
 </form>
@@ -92,7 +92,7 @@ router.get('/posts/new', function(req) {
 });
 ```
 
-this will render the form and post to the `/posts` route. All we need is something to listen to this. It's time to set up the couchdb. Add a requirement to the couch in `app.js`. To do so head over to [nano](https://github.com/dscape/nano) and/or install via npm
+this will render the new-post-form which posts to the `/posts` route. All we need is something to listen to this. It's time to set up the couchdb. Head over to a [free CouchDB host of your own choice](https://www.smileupps.com/) and create an instance. Remember the url of the instance and a requirement to the couch in `app.js`. To do so head over to [nano](https://github.com/dscape/nano) and/or install via npm
 
 ```bash
 npm install --save nano
@@ -104,15 +104,37 @@ require it
 var nano = require('nano')('https://couchdb-f0fd27.smileupps.com');
 ```
 
-to create a new database:
+to create a new database you can use nano for this:
 
 ```javascript
-//nano.db.create('alice'); done this already in https://couchdb-f0fd27.smileupps.com/_utils/fauxton/
+nano.db.create('articles');
 ```
 
-and to use it:
+but I have done this already in https://couchdb-f0fd27.smileupps.com/_utils/fauxton/. Head over there and create a database and paste in the name to use it:
 
 ```javascript
 var articles = nano.db.use('articles');
 ```
 
+The full `POST` route looks something like this
+
+```javascript
+router.post('/posts', function(req) {
+  var post = req.params;
+  post.type = 'post';
+
+  var articles = nano.db.use('articles');
+
+  articles.insert(post, function(err, body, header) {
+    if (err) {
+      console.log('[articles.insert] ', err.message);
+      return;
+    }
+    console.log('you have inserted the body: ', body)
+    console.log(body);
+    return bogart.redirect('/posts');
+  });
+}
+```
+
+ It will insert your post in the articles database and redirect your user to the /posts url. Which does not exist yet.
