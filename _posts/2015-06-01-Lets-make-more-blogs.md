@@ -138,3 +138,33 @@ router.post('/posts', function(req) {
 ```
 
  It will insert your post in the articles database and redirect your user to the /posts url. Which does not exist yet.
+
+The posts-router fetches the articles and passes them to the view, quite straight forward
+```javascript
+router.get('/posts', function(req) {
+  var articles = nano.db.use('articles');
+
+  var readlist = bogart.promisify(articles.list);
+
+  return readlist().then(function(data) {
+    console.log(data);
+    return viewEngine.respond('posts.html', { locals: { postlist: data.rows} });
+  });
+  console.log('render');
+});
+```
+
+ Next up the view. Lets see how this works.
+ 
+ ```html
+ <h1>A list of posts</h1>
+{{ #postlist }}
+  {{id}} - {{value}}</br>
+{{ /postlist }}
+```
+
+produces the following output
+
+![image](https://cloud.githubusercontent.com/assets/181719/8007546/ae941640-0b9c-11e5-95bd-7a367f5cb21e.png)
+
+Not so nice, and definately no sgar ... but we've proven a point here.
