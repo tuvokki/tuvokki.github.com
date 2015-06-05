@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Let's make more blogs!"
-published: false
 ---
 This is part 2 of a series of blogs about blogs. In [part one]({% post_url 2015-05-28-lets-make-blogs %}) we created a simple webserver with [bogart](https://github.com/nrstott/bogart) and did some bogus routing to get it all set up. Now it's time to add some functionality!
 
@@ -167,4 +166,37 @@ produces the following output
 
 ![image](https://cloud.githubusercontent.com/assets/181719/8007546/ae941640-0b9c-11e5-95bd-7a367f5cb21e.png)
 
-Not so nice, and definately no sgar ... but we've proven a point here.
+Not so nice, and definately no sigar ... but we've proven a point here.
+If you look at the data (see the `postlist` variable we passed to our view: `data.rows`) we can actually see that it is correct
+
+```
+{ total_rows: 8,
+  offset: 0,
+  rows:
+   [ { id: '1ec1ba2efd99b08a296022a471000adc',
+       key: '1ec1ba2efd99b08a296022a471000adc',
+       value: [Object] },
+     { id: '1ec1ba2efd99b08a296022a471000e8f',
+       key: '1ec1ba2efd99b08a296022a471000e8f',
+       value: [Object] },
+     { id: '1ec1ba2efd99b08a296022a471001e83',
+       key: '1ec1ba2efd99b08a296022a471001e83',
+       value: [Object] },
+     { id: '1ec1ba2efd99b08a296022a471002a1a',
+       key: '1ec1ba2efd99b08a296022a471002a1a',
+       value: [Object] },
+     { id: '20ce1f108a8bdf2f19f04f42b0001211',
+       key: '20ce1f108a8bdf2f19f04f42b0001211',
+       value: [Object] },
+     { id: '20ce1f108a8bdf2f19f04f42b0001a04',
+       key: '20ce1f108a8bdf2f19f04f42b0001a04',
+       value: [Object] },
+     { id: '4621304957fe61369fabd57a10000b2a',
+       key: '4621304957fe61369fabd57a10000b2a',
+       value: [Object] },
+     { id: 'debc644610a205948ed3704105002661',
+       key: 'debc644610a205948ed3704105002661',
+       value: [Object] } ] }
+```
+
+What we really want to know and what we need to access are those [Object]-objects. For that we need query the CouchDB a little more. And that's a nice topic for the next article in this series.
