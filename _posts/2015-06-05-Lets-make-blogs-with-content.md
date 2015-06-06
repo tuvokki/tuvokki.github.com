@@ -15,3 +15,14 @@ function(doc) {
 ```
 
 This is a map function, and it is written in JavaScript. If you are not familiar with JavaScript but have used C or any other C-like language such as Java, PHP, or C#, this should look familiar. It is a simple function definition.
+
+Here is the simplest example of a map function:
+
+```javascript
+  //Toggle line numbers
+   1 function(doc) {
+   2   emit(doc._id, doc);
+   3 }
+```
+
+This function defines a table that contains all the documents in a CouchDB database, with the _id as the key.
