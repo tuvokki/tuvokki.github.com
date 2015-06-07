@@ -26,3 +26,17 @@ Here is the simplest example of a map function:
 ```
 
 This function defines a table that contains all the documents in a CouchDB database, with the _id as the key.
+
+Now let’s talk about two simple views. First, it’s pretty likely you’ll want to be able to list all your recipes by name. Here’s the one possible view for that:
+
+```javascript
+function(doc) {
+  if (doc.type === 'DrinkRecipe') {
+    emit(doc.name.toLowerCase(), doc.name);
+  }
+}
+```
+
+We’ll store that in the ‘drinks’ design doc as ‘byName’. We’re emitting the document name in lowercase as the key (the first argument to emit), and the name as the value so we can preserve the case. Let’s grab at that view with curl:
+
+$ curl http://127.0.0.1:5984/drinks/_design/drinks/_view/byName
