@@ -38,9 +38,9 @@ At this point we still have nothing even remotely resembling a blog. So lets upd
 
 ```html
 <article role="main">
-  <h1>{{ "{{ title "}}}}</h1>
+  <title>{{ "{{ title "}}}}</title>
   <p>
-  {{ "{{ body "}}}}
+  {{ "{{{ body "}}}}}
   </p>
 </article>
 ```
@@ -60,7 +60,7 @@ The mustache template to create a new post is as follows
 
 ```html
 <section class="articlenew">
-  <h1>{{ title }}</h1>
+  <title>{{ "{{ title "}}}}</title>
   <p>
     <form method='post' action='/posts' class='articleform'>
       <fieldset>
@@ -168,11 +168,11 @@ router.get('/posts', function(req) {
  
  ```html
 <section class="articlelist">
-  <h1>{{ title }}</h1>
+  <title>{{ "{{ title "}}}}</title>
   <p>
-    {{ #postlist }}
-      {{id}} - {{value}}</br>
-    {{ /postlist }}
+    {{ "{{ #postlist "}}}}
+      {{ "{{id "}}}} - {{ "{{value "}}}}</br>
+    {{ "{{ /postlist "}}}}
   </p>
 </section>
 ```
