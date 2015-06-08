@@ -57,7 +57,7 @@ But that's no data! We must hook up the couchdb. There are two routes that we wi
 - `GET /posts/new` -> returns a form to create a new post
 - `POST /posts` -> creates a new post from the form parameters provided
 
-The mustache template to create a new post is as follows
+Save the mustache template to `views/new-post.html` and add the code to create a new post as follows
 
 ```html
 <section class="articlenew">
@@ -165,7 +165,7 @@ router.get('/posts', function(req) {
 });
 ```
 
- Next up the view. Lets see how this works.
+ Next up the view. Lets see how this works. Create a file called `views/posts.html` and put the following in
  
  ```html
 <section class="articlelist">
@@ -178,7 +178,7 @@ router.get('/posts', function(req) {
 </section>
 ```
 
-produces the following output
+this produces the following output
 
 ![image](https://cloud.githubusercontent.com/assets/181719/8032176/643363b4-0dd4-11e5-8fde-0490e1197733.png)
 
