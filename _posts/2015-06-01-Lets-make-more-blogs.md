@@ -117,7 +117,7 @@ to create a new database you can use the nano to do it programatically:
 nano.db.create('articles');
 ```
 
-but I have done this already in https://[your-couchdb-instance].smileupps.com/_utils/fauxton/. Head over there and create a database and paste in the name to use it:
+but I have done this already in `https://[your-couchdb-instance].smileupps.com/_utils/fauxton/` (just add `/_utils/fauxton/` to the base url of your CouchDB instance). Head over there and create a database and paste in the name to use it:
 
 ```javascript
 var articles = nano.db.use('articles');
