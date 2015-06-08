@@ -3,7 +3,7 @@ layout: post
 title: "Let's make more blogs!"
 published: true
 ---
-This is part 2 of a series of blogs about blogs. In [part one]({% post_url 2015-05-28-lets-make-blogs %}) we created a simple webserver with [bogart](https://github.com/nrstott/bogart) and did some bogus routing to get it all set up. Now it's time to add some functionality!
+This is part 2 of a series of blogs about blogs. In [part one](http://tuvokki.github.io/lets-make-blogs/) we created a simple webserver with [bogart](https://github.com/nrstott/bogart) and did some bogus routing to get it all set up. Now it's time to add some functionality!
 
 ##Eye-candy
 I started early today so I have already did some work before you finally arrived. Since it is not really on-topic, I added a very basic styling to the layout of the page. This was not free, and it touches the webserver, so I'll quickly go through it.
