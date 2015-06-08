@@ -170,9 +170,6 @@ router.get('/posts', function(req) {
 <section class="articlelist">
   <title>{{ "{{ title "}}}}</title>
   <p>
-    {{ "{{ #postlist "}}}}
-      {{ "{{id "}}}} - {{ "{{value "}}}}</br>
-    {{ "{{ /postlist "}}}}
   </p>
 </section>
 ```
