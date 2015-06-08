@@ -161,6 +161,6 @@ And all we have to do is add an index to render it all. Save index.html in the v
 </p>
 {% endhighlight %}
 
-Now check [http://localhost:9981/](http://localhost:9981/) again and voila, there we have a HTML5 powered message coming from our back-end. The only thing left is hook up this CouchDB and we have a blog. But that's work left for part two of this series.
+Now check [http://localhost:9981/](http://localhost:9981/) again and voila, there we have a HTML5 powered message coming from our back-end. The only thing left is hook up this CouchDB and we have a blog. But that's work left for [part two of this series]({% post_url 2015-06-01-Lets-make-more-blogs %}).
 
 Checkout [the code tagged part1](https://github.com/tuvokki/bogart-blog/tree/part1) and play with it, or download [the 'part 1' release](https://github.com/tuvokki/bogart-blog/releases/tag/part1).
