@@ -25,7 +25,7 @@ The directory should look something like this now:
 
 ![Dirlisting of our project](/images/posts/Lets-make-more-blogs-dirlist.png)
 
-In this `public`-folder we canput all stuff that needs to be in or site, but needs not be processed. Like css. So we'll create a css subfolder in it and a nice stylesheet called `site.css` (just grab it from here /*TODO: insert link to site.css*/), and add it in the head of our `layout.html` like this
+In this `public`-folder we can put all stuff that needs to be in or site, but needs not be processed. Like css. So we'll create a css subfolder in it and a nice stylesheet called `site.css` (just grab it from here /*TODO: insert link to site.css*/), and add it in the head of our `layout.html` like this
 
 ```html
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,7 +51,7 @@ In `app.js` we'll have to match the mustaches required here
 var article = { locals: { title: "header title", body: "A body that consists of a lot of things." } };
 ```
 
-But that' not data! We must hook up the couchdb. There are two routes that we will need in order to create a post.
+But that's no data! We must hook up the couchdb. There are two routes that we will need in order to create a post.
 
 - `GET /posts/new` -> returns a form to create a new post
 - `POST /posts` -> creates a new post from the form parameters provided
@@ -59,25 +59,31 @@ But that' not data! We must hook up the couchdb. There are two routes that we wi
 The mustache template to create a new post is as follows
 
 ```html
-<form method='post' action='/posts' class='articleform'>
-  <fieldset>
-    <legend>New Post</legend>
+<section class="articlenew">
+  <h1>{{ title }}</h1>
+  <p>
+    <form method='post' action='/posts' class='articleform'>
+      <fieldset>
+        <legend>New Post</legend>
 
-    <div>
-      <label for='title'>Title</label>
-      <input name='title' />
-    </div>
+        <div>
+          <label for='title'>Title</label>
+          <input name='title' />
+        </div>
 
-    <div>
-      <label for='body'>Body</label>
-      <textarea name='body' rows='30' columns='125'></textarea>
-    </div>
+        <div>
+          <label for='body'>Body</label>
+          <textarea name='body' rows='30' columns='125'></textarea>
+        </div>
 
-    <div class='buttons'>
-      <button>Save</button>
-    </div>
-  </fieldset>
-</form>
+        <div class='buttons'>
+          <button>Save</button>
+          <a href="/">Cancel</a>
+        </div>
+      </fieldset>
+    </form>
+  </p>
+</section>
 ```
 
 And for this form we'll make a route
@@ -86,13 +92,13 @@ And for this form we'll make a route
 router.get('/posts/new', function(req) {
   return viewEngine.respond('new-post.html', {
     locals: {
-      title: 'New Post'
+      title: 'add some content'
     }
   })
 });
 ```
 
-this will render the new-post-form which posts to the `/posts` route. All we need is something to listen to this. It's time to set up the couchdb. Head over to a [free CouchDB host of your own choice](https://www.smileupps.com/) and create an instance. Remember the url of the instance and a requirement to the couch in `app.js`. To do so head over to [nano](https://github.com/dscape/nano) and/or install via npm
+this will render the new-post-form which posts to the `/posts` route. All we need is something to listen to this. It's time to set up the couchdb. Head over to a [free CouchDB host of your own choice](https://www.smileupps.com/) and create an instance. Remember the url of the instance and add a requirement to the couch in `app.js`. To do so head over to [nano](https://github.com/dscape/nano) and/or install via npm
 
 ```bash
 npm install --save nano
@@ -101,21 +107,22 @@ npm install --save nano
 require it
 
 ```javascript
-var nano = require('nano')('https://couchdb-f0fd27.smileupps.com');
+var nano = require('nano')('https://[your-couchdb-instance].smileupps.com');
 ```
 
-to create a new database you can use nano for this:
+to create a new database you can use the nano to do it programatically:
 
 ```javascript
 nano.db.create('articles');
 ```
 
-but I have done this already in https://couchdb-f0fd27.smileupps.com/_utils/fauxton/. Head over there and create a database and paste in the name to use it:
+but I have done this already in https://[your-couchdb-instance].smileupps.com/_utils/fauxton/. Head over there and create a database and paste in the name to use it:
 
 ```javascript
 var articles = nano.db.use('articles');
 ```
 
+As you can see the new article form does a `POST`-request to a route called `/posts` which handles the incoming data. Let's assume that it is all correct and verified by a much more modern frontend than we have here.
 The full `POST` route looks something like this
 
 ```javascript
@@ -125,21 +132,19 @@ router.post('/posts', function(req) {
 
   var articles = nano.db.use('articles');
 
-  articles.insert(post, function(err, body, header) {
-    if (err) {
-      console.log('[articles.insert] ', err.message);
-      return;
-    }
-    console.log('you have inserted the body: ', body)
-    console.log(body);
+  var insert_article = bogart.promisify(articles.insert);
+
+  return insert_article(post).then(function(data) {
+    console.log('you have inserted the body: ', data)
+    return bogart.redirect('/posts');
   });
-  return bogart.redirect('/posts');
 });
 ```
 
- It will insert your post in the articles database and redirect your user to the /posts url. Which does not exist yet.
+It will insert your post in the articles database and redirect your user to the /posts url. Which does not exist yet.
 
 The posts-router fetches the articles and passes them to the view, quite straight forward
+
 ```javascript
 router.get('/posts', function(req) {
   var articles = nano.db.use('articles');
@@ -148,7 +153,12 @@ router.get('/posts', function(req) {
 
   return readlist().then(function(data) {
     console.log(data);
-    return viewEngine.respond('posts.html', { locals: { postlist: data.rows} });
+    return viewEngine.respond('posts.html', {
+      locals: {
+        title: 'all posts',
+        postlist: data.rows
+      }
+    });
   });
   console.log('render');
 });
@@ -157,17 +167,21 @@ router.get('/posts', function(req) {
  Next up the view. Lets see how this works.
  
  ```html
- <h1>A list of posts</h1>
-{{ #postlist }}
-  {{id}} - {{value}}</br>
-{{ /postlist }}
+<section class="articlelist">
+  <h1>{{ title }}</h1>
+  <p>
+    {{ #postlist }}
+      {{id}} - {{value}}</br>
+    {{ /postlist }}
+  </p>
+</section>
 ```
 
 produces the following output
 
-![image](https://cloud.githubusercontent.com/assets/181719/8007546/ae941640-0b9c-11e5-95bd-7a367f5cb21e.png)
+![image](https://cloud.githubusercontent.com/assets/181719/8032176/643363b4-0dd4-11e5-8fde-0490e1197733.png)
 
-Not so nice, and definately no sigar ... but we've proven a point here.
+As you can see I have added some links to our routes in the layout of the page, but this output of our route is not so nice, and definately no sigar ... but we've proven a point here.
 If you look at the data (see the `postlist` variable we passed to our view: `data.rows`) we can actually see that it is correct
 
 ```
@@ -199,5 +213,4 @@ If you look at the data (see the `postlist` variable we passed to our view: `dat
        key: 'debc644610a205948ed3704105002661',
        value: [Object] } ] }
 ```
-
-What we really want to know and what we need to access are those [Object]-objects. For that we need query the CouchDB a little more. And that's a nice topic for the next article in this series.
+You can check the ref-id's in your database and see what you have posted there. What we really want to know and what we need to access are those [Object]-objects. For that we need query the CouchDB a little more. And that's a nice topic for the next article in this series.
