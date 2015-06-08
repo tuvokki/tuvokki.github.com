@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Let's make more blogs!"
-Published: false
 ---
 This is part 2 of a series of blogs about blogs. In [part one]({% post_url 2015-05-28-lets-make-blogs %}) we created a simple webserver with [bogart](https://github.com/nrstott/bogart) and did some bogus routing to get it all set up. Now it's time to add some functionality!
 
@@ -25,7 +24,7 @@ The directory should look something like this now:
 
 ![Dirlisting of our project](/images/posts/Lets-make-more-blogs-dirlist.png)
 
-In this `public`-folder we can put all stuff that needs to be in or site, but needs not be processed. Like css. So we'll create a css subfolder in it and a nice stylesheet called `site.css` (just grab it from here /*TODO: insert link to site.css*/), and add it in the head of our `layout.html` like this
+In this `public`-folder we can put all stuff that needs to be in or site, but needs not be processed. Like css. So we'll create a css subfolder in it and a nice stylesheet called `site.css` (just grab it from here [site.css](https://github.com/tuvokki/bogart-blog/blob/part2/public/css/site.css)), and add it in the head of our `layout.html` like this
 
 ```html
   <meta name="viewport" content="width=device-width, initial-scale=1">
