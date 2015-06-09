@@ -3,7 +3,18 @@ layout: post
 title: "Let's make blogs with content"
 published: false
 ---
+We're finally at a point that we start to care aboutr content here. In parts [one]({% post_url 2015-05-28-Lets-make-blogs %}) we created a simple webserver and in part [two]({% post_url 2015-06-01-Lets-make-more-blogs %}) we hooked up the database. Now make some content.
 
+##Fix the first two posts
+Ofcourse we made a mess of things the first two posts. That's the way projects like this evolve. En we don't want to do things perfectly in iteration one. That first exploration of the technology we're new in is meant for that. Just exploring. What we have now, downloadble, chakoutable in [the github repo of this project](https://github.com/tuvokki/bogart-blog/tree/part2) is in screaming need for some structure, as to say, some common Software Engineering practices. Okay, let's not overdo it ... a little sense. Oh, and content, as I promised.
+
+Do you remember the strange looking list of posts we've produced
+
+
+
+
+
+###some background
 You provide CouchDB with view functions as strings stored inside the views field of a design document. You don’t run it yourself. Instead, when you query your view, CouchDB takes the source code and runs it for you on every document in the database your view was defined in. You query your view to retrieve the view result.
 
 ```javascript
