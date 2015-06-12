@@ -4,7 +4,7 @@ title: "Intermezzo for lazy bloggers"
 ---
 Recently I sumbled on the Markov Chain.  A Markov chain is collection of random variables {X_t} (where the index t runs through 0, 1, ...) having the property that, given the present, the future is conditionally independent of the past.
 
-[https://en.wikipedia.org/wiki/Markov_chain](Wikipedia) is a little clearer
+[Wikipedia](https://en.wikipedia.org/wiki/Markov_chain) is a little clearer
 
  ...Markov chain is a stochastic process with markov property ... [Which means] state changes are probabilistic, and future state depend on current state only.
 Markov chains have various uses, but now let's see how it can be used to generate gibberish, which might look legit.
