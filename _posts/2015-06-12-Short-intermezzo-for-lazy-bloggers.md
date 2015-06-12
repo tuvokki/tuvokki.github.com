@@ -16,12 +16,12 @@ The algorithm is
 3. Generating next word is the markov transition. To generate the next word, look in the corpus, and find which words are present after the given two words. Choose one of them randomly.
 4. Repeat 2, until text of required size is generated.
 
-The above description is borrowed from [http://agiliq.com/blog/2009/06/generating-pseudo-random-text-with-markov-chains-u/](Generating pseudo random text with Markov chains using Python) written by Shabda Raaj. It holds a very nice code sample in python.
+The above description is borrowed from [Generating pseudo random text with Markov chains using Python](http://agiliq.com/blog/2009/06/generating-pseudo-random-text-with-markov-chains-u/) written by Shabda Raaj. It holds a very nice code sample in python.
 
 ###Lazy blogging
 That sounds interesting enough when you come to the topic of lazy bloggers. A long text, fed into a markov chain generator produces a new text that reads like legit text, but in fact is gibberish. Brilliant.
 
-A little more googling revealed a number of generators that do exactly that, but then with an API. I will show how easy it is to populate the new-posts form in our bogart blog with this text using the API privided by [http://www.schmipsum.com/](Schmipsum). Here's the code
+A little more googling revealed a number of generators that do exactly that, but then with an API. I will show how easy it is to populate the new-posts form in our bogart blog with this text using the API privided by [Schmipsum](http://www.schmipsum.com/). Here's the code
 
 The schmipsum API can be called with two parameters, the `set` and the `number`, like this:
 
@@ -75,7 +75,7 @@ router.get('/posts/new/:name', function(req) {
 ```
 
 And the steps to get there.
-First get [https://www.npmjs.com/package/request-promise](request-promise), the world-famous HTTP client 'Request' now Promises/A+ compliant.
+First get [request-promise](https://www.npmjs.com/package/request-promise), the world-famous HTTP client 'Request' now Promises/A+ compliant.
 
     npm install --save request-promise
 
@@ -105,4 +105,4 @@ and finally add a little css to put all the options from the set on one line:
 }
 ```
 
-Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on [https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo](the github repo for bogart-blog). Next up is [http://tuvokki.github.io/Lets-make-blogs-with-content/](reading the blog entries).
+Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on [the github repo for bogart-blog](https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo). Next up is [reading the blog entries](http://tuvokki.github.io/Lets-make-blogs-with-content/).
