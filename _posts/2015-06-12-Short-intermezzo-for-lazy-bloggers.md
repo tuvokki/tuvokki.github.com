@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Short intermezzo for lazy bloggers"
+title: "Intermezzo for lazy bloggers"
 ---
 Recently I sumbled on the Markov Chain.  A Markov chain is collection of random variables {X_t} (where the index t runs through 0, 1, ...) having the property that, given the present, the future is conditionally independent of the past.
 
