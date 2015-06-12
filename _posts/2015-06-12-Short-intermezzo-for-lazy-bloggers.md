@@ -99,6 +99,7 @@ I've added the sets in the html of the new-posts so that we can choose after we 
 ```
 
 and finally add a little css to put all the options from the set on one line:
+
 ```css
 .articlenew ul.sets li {
   display: inline;
