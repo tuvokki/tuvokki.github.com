@@ -108,6 +108,6 @@ and finally add a little css to put all the options from the set on one line:
 
 And here's the result, nice huh?
 
-![It will look something like this](/posts/Intermezzo-result.png "Result")
+![It will look something like this](/images/posts/Intermezzo-result.png)
 
 Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on [the github repo for bogart-blog](https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo). Next up is [reading the blog entries]({% post_url 2015-06-14-Lets-make-blogs-with-content %}).
