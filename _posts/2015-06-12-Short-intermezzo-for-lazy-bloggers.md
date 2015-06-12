@@ -105,4 +105,4 @@ and finally add a little css to put all the options from the set on one line:
 }
 ```
 
-Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh!
+Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on [https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo](the github repo for bogart-blog). Next up is [http://tuvokki.github.io/Lets-make-blogs-with-content/](reading the blog entries).
