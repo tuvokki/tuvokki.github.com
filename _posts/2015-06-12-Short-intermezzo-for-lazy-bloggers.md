@@ -2,7 +2,9 @@
 layout: post
 title: "Intermezzo for lazy bloggers"
 ---
-Recently I sumbled on the Markov Chain.  A Markov chain is collection of random variables {X_t} (where the index t runs through 0, 1, ...) having the property that, given the present, the future is conditionally independent of the past.
+You know I'm working on [a blog in Bogart.js and CouchDB]({% post_url 2015-06-01-Lets-make-more-blogs %}). Recently I sumbled on the Markov Chain. Lets make use of that in this project.
+
+A Markov chain is collection of random variables {X_t} (where the index t runs through 0, 1, ...) having the property that, given the present, the future is conditionally independent of the past.
 
 [Wikipedia](https://en.wikipedia.org/wiki/Markov_chain) is a little clearer
 
