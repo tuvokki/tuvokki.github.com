@@ -86,15 +86,15 @@ Pass the body, title and sets to the mustache, and read them when rendering.
 I've added the sets in the html of the new-posts so that we can choose after we have been redirected to a random set.
 
 ```html
-  <input name='title' value="{{ title }}"></input>
+  <input name='title' value="{{ "{{ title "}}}}"></input>
 
-  <textarea name='body' rows='30' columns='125'>{{ body }}</textarea>
+  <textarea name='body' rows='30' columns='125'>{{ "{{ body "}}}}</textarea>
 
     <hr>
     <ul class="sets">Or create a new article based on:<br>
-      {{#allsets}}
-      <li><a href="/posts/new/{{.}}">{{.}}</a></li>
-      {{/allsets}}
+      {{ "{{ #allsets "}}}}
+      <li><a href="/posts/new/{{ "{{."}}}}">{{ "{{."}}}}</a></li>
+      {{ "{{ /allsets "}}}}
     </ul>
 ```
 
@@ -110,4 +110,4 @@ And here's the result, nice huh?
 
 ![It will look something like this](/images/posts/Intermezzo-result.png)
 
-Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on [the github repo for bogart-blog](https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo). 
+Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on [the github repo for bogart-blog](https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo).
