@@ -5,7 +5,6 @@ published: false
 ---
 layout: post
 title: "Don't hardcode db names"
-published: false
 ---
 Following the series of blogposts about making a blog [part one]({% post_url 2015-05-28-Lets-make-blogs %}), [part two]({% post_url 2015-06-01-Lets-make-more-blogs %}), [the intermezzo]({ post_url 2015-06-12-Short-intermezzo-for-lazy-bloggers }) and finally [part three]({% post_url 2015-06-13-Lets-make-blogs-with-content %}) I have some todo's left in the code. 
 
