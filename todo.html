@@ -1,67 +1,133 @@
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-<script src="http://code.angularjs.org/1.2.6/angular.min.js"></script>
-<script src="https://cdn.firebase.com/v0/firebase.js"></script>
-<script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+<html ng-app="sampleApp">
+  <head>
+    <title>ToDo – Wouter Roosendaal – What about todo?</title>
+
+    <meta charset="utf-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     
-<body ng-controller="DemoCtrl" class="container"  ng-app="DemoApp">
+    <meta name="description" content="What about todo?">
+    <meta property="og:description" content="What about todo?">
+    
+    <meta name="author" content="Wouter Roosendaal">
 
-<h2>Realtime ToDo list with AngularJS and AngularFire</h2>
-<h4>Try it opening two browsers and adding / removing a TODO</h4>
+    
+    <meta property="og:title" content="ToDo">
+    <meta property="twitter:title" content="ToDo">
+    
 
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
- <!--ADD ITEM FORM-->
- <form name="myForm">
+    <link rel="stylesheet" type="text/css" href="/style.css">
 
-     <div>
-         <input type="text"
-                name="todoNameField"
-                ng-model="todoName"
-                placeholder="Add new task (min 3 chars)"
-                required ng-minlength="3"
-                class="form-control"
-                ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
-                style="margin-bottom: 10px"
-                />
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
+    <script src="js/firebase-todo.js"></script>
+  </head>
 
-         <button ng-click="addItem()"
-                         ng-hide="myForm.todoNameField.$invalid"
-                         class="btn btn-primary" type="button"
-                         >Save Todo</button>
-     </div>
+  <body cz-shortcut-listen="true" ng-controller="SampleCtrl">
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://avatars2.githubusercontent.com/u/181719?s=80"></a>
 
- </form>
-<button ng-click="testItems()">Test</button>
-<hr>
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Wouter Roosendaal</a></h1>
+            <p class="site-description">What about todo?</p>
+          </div>
 
-
-<!--TODO LIST-->
-<div ng-repeat="item in todos" class=" list-group-item row">
-
-    <div  class="col-md-6">
-        <!--COMPLETED ICON-->
-         <span class="glyphicon glyphicon-thumbs-up"
-               ng-show="item.completed"> </span>
-
-
-        <!--todo label-->
-        <span>{{item.name}} </span>
-
-        <small  class="text-warning"> [ {{item.id}} ]</small>
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
     </div>
 
+    <div id="main" role="main" class="container">
+      <article class="page">
 
-    <div  class="col-md-6">
-        <!--Delete Todo button-->
-        <a class="btn btn-danger" ng-click="removeItem($index, item, $event)">
-            <i class="icon-remove-sign"></i>Delete
-        </a>
+      <h1>ToDo list</h1>
+      <div>Realtime ToDo list with AngularJS and AngularFire</div>
+      <div>Try it opening two browsers and adding / removing a TODO</div>
 
-        <a class="btn btn-warning" ng-click="changeStatus(item)">
-            <i class="icon-remove-sign"></i>Change Status
-        </a>
+
+       <!--ADD ITEM FORM-->
+       <form name="myForm">
+
+           <div>
+               <input type="text"
+                      name="todoNameField"
+                      ng-model="todoName"
+                      placeholder="Add new task (min 3 chars)"
+                      required ng-minlength="3"
+                      class="form-control"
+                      ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
+                      style="margin-bottom: 10px"
+                      />
+
+               <button ng-click="addItem()"
+                               ng-hide="myForm.todoNameField.$invalid"
+                               class="btn btn-primary" type="button"
+                               >Save Todo</button>
+           </div>
+
+       </form>
+      <!-- <button ng-click="testItems()">Test</button> -->
+      <hr>
+
+
+      <!--TODO LIST-->
+      <div ng-repeat="item in todos" class=" list-group-item row">
+
+          <div  class="col-md-6">
+              <!--COMPLETED ICON-->
+               <span class="glyphicon glyphicon-thumbs-up"
+                     ng-show="item.completed"> </span>
+
+
+              <!--todo label-->
+              <span>{{item.name}} </span>
+
+              <small  class="text-warning"> [ {{item.timestamp | date:'yyyy-MM-dd HH:mm:ss Z'}} ]</small>
+          </div>
+
+
+          <div  class="col-md-6">
+              <!--Delete Todo button-->
+              <a class="btn btn-danger" ng-click="removeItem($index, item, $event)">
+                  <i class="icon-remove-sign"></i>Delete
+              </a>
+
+              <a class="btn btn-warning" ng-click="changeStatus(item)">
+                  <i class="icon-remove-sign"></i>Change Status
+              </a>
+          </div>
+
+
+      </div>
+      <!-- <pre>{{todos}}</pre> -->
+
+      </article>
+
     </div>
 
-
-</div>
-<script src="js/firebase-todo.js"></script>
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <a href="https://github.com/tuvokki"><i class="svg-icon github"></i></a>
+          <a href="https://www.linkedin.com/in/wouterroosendaal"><i class="svg-icon linkedin"></i></a>
+          <a href="https://www.twitter.com/tuvokki"><i class="svg-icon twitter"></i></a>
+          <a href="http://stackoverflow.com/users/2245236/tuvokki"><i class="svg-icon stackoverflow"></i></a>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

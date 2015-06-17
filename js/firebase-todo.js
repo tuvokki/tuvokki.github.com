@@ -1,66 +1,45 @@
-var myApp = angular.module('DemoApp', ['firebase']);
+var app = angular.module("sampleApp", ["firebase"]);
 
-myApp.constant("FIREBASE_URL", "https://amber-fire-3343.firebaseio.com/todos" )
+app.controller("SampleCtrl", function($scope, $firebaseArray) {
+  // Get Stored TODOs
+  var todosRef = new Firebase("https://amber-fire-3343.firebaseio.com/todos");
+  $scope.todos = $firebaseArray(todosRef);
 
+  $scope.testItems = function() {
+    console.log("$scope.todos", $scope.todos);
+  }
 
-function DemoCtrl($scope, $firebase, FIREBASE_URL) {
+  // Update the "completed" status
+  $scope.changeStatus   = function (olditem) {
+    var item = $scope.todos.$getRecord(olditem.$id);
 
-    // Get Stored TODOs
-    var todosRef = new Firebase(FIREBASE_URL);
-    $scope.todos = $firebase(todosRef);
-
-    $scope.testItems = function() {
-      console.log("$scope.todos", $scope.todos);
-    }
-
-    // Update the "completed" status
-    $scope.changeStatus   = function (item) {
-
-        // Get the Firebase reference of the item
-        var itemRef = new  Firebase(FIREBASE_URL + item.id);
-
-        // Firebase : Update the item
-        $firebase(itemRef).$set({
-            id: item.id,
-            name : item.name,
-            completed: !item.completed
-        });
-
-    }
+    item.completed = !olditem.completed;
+    $scope.todos.$save(item).then(function() {
+      // item has been saved
+    });
+  }
 
 
-
-    // Remove a Todo
-    $scope.removeItem   = function (index, item, event) {
-
-       // Avoid wrong removing
-       if (item.id == undefined)return;
-
-       // Firebase: Remove item from the list
-       $scope.todos.$remove(item.id);
-
-    }
+  // Remove a Todo
+  $scope.removeItem   = function (index, item, event) {
+    // Avoid wrong removing
+    if (item.$id == undefined)return;
+    // Firebase: Remove item from the list
+    $scope.todos.$remove(item).then(function(ref) {
+      ref.key() === item.$id; // true
+    });
+  }
 
 
-
-    // Add new TODO
-    $scope.addItem  = function () {
-
-        // Create a unique ID
-        var timestamp = new Date().valueOf()
-
-        // Get the Firebase reference of the item
-        var itemRef = new Firebase(FIREBASE_URL + timestamp);
-
-        $firebase(itemRef).$set({
-            id: timestamp,
-            name : $scope.todoName,
-            completed: false
-        });
-
-        $scope.todoName = "";
-
-    }
-
-
-}
+  // Add new TODO
+  $scope.addItem  = function () {
+    // Create a unique ID
+    var timestamp = new Date().valueOf()
+    $scope.todos.$add({
+      timestamp: timestamp,
+      name : $scope.todoName,
+      completed: false
+    });
+    $scope.todoName = "";
+  }
+});
