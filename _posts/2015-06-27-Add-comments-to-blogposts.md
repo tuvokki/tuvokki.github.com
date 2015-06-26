@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Add comments to posts
-published: true
+published: false
 ---
 
 Recently I got an issue about comments.
