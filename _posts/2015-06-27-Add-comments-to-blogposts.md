@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Don't hardcode db names"
+title: Add comments to posts
 published: true
 ---
 
