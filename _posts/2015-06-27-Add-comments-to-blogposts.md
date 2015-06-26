@@ -1,5 +1,7 @@
 ---
 layout: post
 title: "Don't hardcode db names"
-published: false
+published: true
 ---
+
+Recently I got an issue about comments.
