@@ -215,6 +215,6 @@ If you look at the data (see the `postlist` variable we passed to our view: `dat
        value: [Object] } ] }
 ```
 
-You can check the ref-id's in your database and see what you have posted there. What we really want to know and what we need to access are those [Object]-objects. For that we need query the CouchDB a little more. And that's a nice topic for the [next article in this series]({ post_url 2015-06-12-Short-intermezzo-for-lazy-bloggers }).
+You can check the ref-id's in your database and see what you have posted there. What we really want to know and what we need to access are those [Object]-objects. For that we need query the CouchDB a little more. And that's a nice topic for the [next article in this series]({% post_url 2015-06-12-Short-intermezzo-for-lazy-bloggers %}).
 
 The [release after this article](https://github.com/tuvokki/bogart-blog/releases/tag/part2) is available, as well as the [tagged sourcecode in the github reppo for this blog](https://github.com/tuvokki/bogart-blog/tree/part2).
