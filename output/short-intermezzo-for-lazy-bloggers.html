@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>What are Git?</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="./theme/css/poole.css" />
+		<link rel="stylesheet" href="./theme/css/hyde.css" />
+		<link rel="stylesheet" href="./theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="./images/wouter-krijt.png">
+					What are Git?
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="mailto:tuvokki@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			<a class="sidebar-nav-item" href="https://github.com/tuvokki">
+				<i class="fa fa-github"></i>
+			</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Short-intermezzo-for-lazy-bloggers</h1>
+	<span class="post-date">Fri 12 June 2015</span>
+	<p>You know I'm working on <a href="{% post_url 2015-06-01-Lets-make-more-blogs %}">a blog in Bogart.js and CouchDB</a>. Recently I sumbled on the Markov Chain. Lets make use of that in this project.</p>
+<p>A Markov chain is collection of random variables {X_t} (where the index t runs through 0, 1, ...) having the property that, given the present, the future is conditionally independent of the past.</p>
+<p><a href="https://en.wikipedia.org/wiki/Markov_chain">Wikipedia</a> is a little clearer</p>
+<p>...Markov chain is a stochastic process with markov property ... [Which means] state changes are probabilistic, and future state depend on current state only.
+Markov chains have various uses, but now let's see how it can be used to generate gibberish, which might look legit.</p>
+<p>The algorithm is</p>
+<ol>
+<li>Have a text which will serve as the corpus from which we choose the next transitions.</li>
+<li>Start with two consecutive words from the text. The last two words constitute the present state.</li>
+<li>Generating next word is the markov transition. To generate the next word, look in the corpus, and find which words are present after the given two words. Choose one of them randomly.</li>
+<li>Repeat 2, until text of required size is generated.</li>
+</ol>
+<p>The above description is borrowed from <a href="http://agiliq.com/blog/2009/06/generating-pseudo-random-text-with-markov-chains-u/">Generating pseudo random text with Markov chains using Python</a> written by Shabda Raaj. It holds a very nice code sample in python.</p>
+<h3>Lazy blogging</h3>
+<p>That sounds interesting enough when you come to the topic of lazy bloggers. A long text, fed into a markov chain generator produces a new text that reads like legit text, but in fact is gibberish. Brilliant.</p>
+<p>A little more googling revealed a number of generators that do exactly that, but then with an API. I will show how easy it is to populate the new-posts form in our bogart blog with this text using the API privided by <a href="http://www.schmipsum.com/">Schmipsum</a>. Here's the code</p>
+<p>The schmipsum API can be called with two parameters, the <code>set</code> and the <code>number</code>, like this:</p>
+<div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">schmipsum</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ipsum</span><span class="o">/</span><span class="n">patents</span><span class="o">/</span><span class="mi">100</span>
+</pre></div>
+
+
+<p>which produces a text of 100 words that looks like it is a US Patent. The following sets are available:</p>
+<div class="highlight"><pre><span></span>  <span class="c1">// possible values of schmipsum sets</span>
+  <span class="kd">var</span> <span class="nx">sets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;shakespeare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jane_austen&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lewis_carroll&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;patents&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nixon_tapes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;college_essays&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mission_statements&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;beatrix_potter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;frankenstein&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bible&quot;</span><span class="p">];</span>
+</pre></div>
+
+
+<p>We use this set to randomly forward the user that visits the 'old' new-posts route</p>
+<div class="highlight"><pre><span></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts/new&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//redirect to a random set</span>
+  <span class="k">return</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/posts/new/&#39;</span> <span class="o">+</span> <span class="nx">sets</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">sets</span><span class="p">.</span><span class="nx">length</span><span class="p">)]);</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Then the new new-posts route handles this.</p>
+<div class="highlight"><pre><span></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts/new/:name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">rp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request-promise&#39;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">rp</span><span class="p">(</span><span class="s1">&#39;http://www.schmipsum.com/ipsum/&#39;</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="s1">&#39;/1000&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">responseObject</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nx">viewEngine</span><span class="p">.</span><span class="nx">respond</span><span class="p">(</span><span class="s1">&#39;new-post.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">locals</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">pagetitle</span><span class="o">:</span> <span class="s1">&#39;add some content based on &#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="nx">responseObject</span><span class="p">.</span><span class="nx">ipsum</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">responseObject</span><span class="p">.</span><span class="nx">ipsum</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)),</span>
+          <span class="nx">body</span><span class="o">:</span> <span class="nx">responseObject</span><span class="p">.</span><span class="nx">ipsum</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">responseObject</span><span class="p">.</span><span class="nx">ipsum</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)),</span>
+          <span class="nx">allsets</span><span class="o">:</span> <span class="nx">sets</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>And the steps to get there.
+First get <a href="https://www.npmjs.com/package/request-promise">request-promise</a>, the world-famous HTTP client 'Request' now Promises/A+ compliant.</p>
+<div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="c1">--save request-promise</span>
+</pre></div>
+
+
+<p>Then modify the router to get a parameter, the <code>/:name</code> part. This parameter is available in <code>req.params.name</code>. With the help of the request-promise all we have to do is get the JSON, and make an object from it. Then the object is split from the first <code>\n</code> so we have a nice title, and the rest is put into the body.</p>
+<p>Pass the body, title and sets to the mustache, and read them when rendering.</p>
+<p>I've added the sets in the html of the new-posts so that we can choose after we have been redirected to a random set.</p>
+<div class="highlight"><pre><span></span>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&#39;title&#39;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ &quot;</span><span class="err">{{</span> <span class="na">title</span> <span class="err">&quot;}}}}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">input</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">name</span><span class="o">=</span><span class="s">&#39;body&#39;</span> <span class="na">rows</span><span class="o">=</span><span class="s">&#39;30&#39;</span> <span class="na">columns</span><span class="o">=</span><span class="s">&#39;125&#39;</span><span class="p">&gt;</span>{{ &quot;{{ body &quot;}}}}<span class="p">&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sets&quot;</span><span class="p">&gt;</span>Or create a new article based on:<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+      {{ &quot;{{ #allsets &quot;}}}}
+      <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/posts/new/{{ &quot;</span><span class="err">{{.&quot;}}}}&quot;</span><span class="p">&gt;</span>{{ &quot;{{.&quot;}}}}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      {{ &quot;{{ /allsets &quot;}}}}
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>and finally add a little css to put all the options from the set on one line:</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">articlenew</span> <span class="nt">ul</span><span class="p">.</span><span class="nc">sets</span> <span class="nt">li</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>And here's the result, nice huh?</p>
+<p><img alt="It will look something like this" src="/images/posts/Intermezzo-result.png"></p>
+<p>Some things can be cleaned up, but this is all there is to it. Remember, we're lazy. So if the blogpost is not what we like ... refresh! You can get the code for this blog on <a href="https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo">the github repo for bogart-blog</a>. Next up is <a href="{% post_url 2015-06-13-Lets-make-blogs-with-content %}">reading the blog entries</a>.</p>
+</div>
+		</div>
+	</body>
+</html>

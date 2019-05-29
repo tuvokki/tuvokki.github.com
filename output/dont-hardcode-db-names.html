@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>What are Git?</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="./theme/css/poole.css" />
+		<link rel="stylesheet" href="./theme/css/hyde.css" />
+		<link rel="stylesheet" href="./theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="./images/wouter-krijt.png">
+					What are Git?
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="mailto:tuvokki@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			<a class="sidebar-nav-item" href="https://github.com/tuvokki">
+				<i class="fa fa-github"></i>
+			</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Dont-hardcode-db-names</h1>
+	<span class="post-date">Tue 16 June 2015</span>
+	<p>Following the series of blogposts about making a blog <a href="{% post_url 2015-05-28-Lets-make-blogs %}">part one</a>, <a href="{% post_url 2015-06-01-Lets-make-more-blogs %}">part two</a>, <a href="{ post_url 2015-06-12-Short-intermezzo-for-lazy-bloggers }">the intermezzo</a> and finally <a href="{% post_url 2015-06-13-Lets-make-blogs-with-content %}">part three</a> I have some todo's left in the code. </p>
+<p>One of those resurfaced as an <a href="https://github.com/tuvokki/bogart-blog/issues/3">issue</a> in the <a href="https://github.com/tuvokki/bogart-blog">github repo for the bogart blog</a>. So, let's get on fixing it. This one should be really easy. I suppose we could just follow the directions we have in the issue:</p>
+<div class="highlight"><pre><span></span>    <span class="nv">Use</span> <span class="nv">dotenv</span> <span class="k">for</span> <span class="nv">it</span>
+</pre></div>
+
+
+<p>Heading over to <a href="https://github.com/motdotla/dotenv">dotenv</a> I see we're not in for much of a challenge. I created a local branch for this so I can do my development and testing. Now let's do the work.</p>
+<h2>Installing</h2>
+<div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="n">dotenv</span> <span class="c1">--save</span>
+</pre></div>
+
+
+<p>done.</p>
+<h2>Usage</h2>
+<p>Add the require call to dotenv as early as poosible, so high up in <code>app.js</code> at least above the <code>require('nano')</code>-statement where we want to use it.</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">bogart</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bogart&#39;</span><span class="p">)</span>
+    <span class="p">,</span><span class="nx">path</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+
+<span class="nx">require</span><span class="p">(</span><span class="s1">&#39;dotenv&#39;</span><span class="p">).</span><span class="nx">load</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">viewEngine</span> <span class="o">=</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">viewEngine</span><span class="p">(</span><span class="s1">&#39;mustache&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">bogart</span><span class="p">.</span><span class="nx">maindir</span><span class="p">(),</span> <span class="s1">&#39;views&#39;</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&quot;public&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">router</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">nano</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;nano&#39;</span><span class="p">)(</span><span class="cm">/*THIS IS WHAT WE NEED TO GET FROM THE ENV*/</span><span class="p">);</span>
+<span class="c1">//...the rest of app.js</span>
+</pre></div>
+
+
+<p>The key's we need to read go into a file called <code>.env</code> in the root directory of your project. Add environment-specific variables on new lines in the form of <code>NAME=VALUE</code> in our case we need the following</p>
+<div class="highlight"><pre><span></span><span class="n">DB_HOST</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">couchdb</span><span class="o">-</span><span class="n">whateveryoudbnameis</span><span class="p">.</span><span class="n">smileupps</span><span class="p">.</span><span class="n">com</span>
+</pre></div>
+
+
+<p>Be sure to add the <code>.env</code> file to your <code>.gitignore</code> so you don't accidentally check it in!</p>
+<p>Edit the <code>app.js</code> once more to use the information in the <code>.env</code>-file</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">nano</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;nano&#39;</span><span class="p">)(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DB_HOST</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Done.</p>
+<p>Now we're done I can merge my feature branch and we're ready to commit.</p>
+</div>
+		</div>
+	</body>
+</html>
