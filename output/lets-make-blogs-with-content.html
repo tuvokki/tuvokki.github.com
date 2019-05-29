@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>What are Git?</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://tuvokki.github.io/images/wouter-krijt.png">
+					What are Git?
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="mailto:tuvokki@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			<a class="sidebar-nav-item" href="https://github.com/tuvokki">
+				<i class="fa fa-github"></i>
+			</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Lets-make-blogs-with-content</h1>
+	<span class="post-date">Sat 13 June 2015</span>
+	<p>We're finally at a point that we start to care about content here. In parts <a href="{% post_url 2015-05-28-Lets-make-blogs %}">one</a> we created a simple webserver and in part <a href="{% post_url 2015-06-01-Lets-make-more-blogs %}">two</a> we hooked up the database. Now we have to read that content.</p>
+<h2>Fix the first two posts</h2>
+<p>Ofcourse we made a mess of things the first two posts. That's the way projects like this evolve. En we don't want to do things perfectly in iteration one. That first exploration of the technology we're new in is meant for that. Just exploring and incorporating new ideas. What we have now, downloadble, chekoutable in <a href="https://github.com/tuvokki/bogart-blog/releases/tag/intermezzo">the github repo for bogart-blog - intermezzo</a> is in screaming need for some structure, as to say, some common Software Engineering practices. Okay, let's not overdo it ... a little sense. Oh, and content, as I promised.</p>
+<p>Do you remember the strange looking list of posts we've produced</p>
+<p><img alt="It will look something like this" src="/images/posts/object-allposts.png"></p>
+<p>That's because we just dump the post into a CouchDB document and later retrieve that document from the database and refer to it by it's id. If you log the document we retrieve you can see that all the information is there, but not the way we like it. We'll fix that in a minute, but first we will have to add a so called slug to the post. Instead of referring to the id, we can address an article by it's slug, a title without the 'strange' characters. In the <code>router.post('/posts'</code> function get the title and strip the characters we don't want and replace spaces with dashes</p>
+<div class="highlight"><pre><span></span>  <span class="kd">var</span> <span class="nx">slug</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-zA-Z0-9\s]/g</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+  <span class="nx">slug</span> <span class="o">=</span> <span class="nx">slug</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="nx">slug</span> <span class="o">=</span> <span class="nx">slug</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+  <span class="nx">slug</span> <span class="o">=</span> <span class="nx">slug</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s/g</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Now, when we post a new article it will have the document title filled with the slug instead of a generated id. This is best practice in saving documents to a CouchDB.</p>
+<p>The result, before a post looks like this</p>
+<p><img alt="before sluggification" src="/images/posts/before-sluggification.png"></p>
+<p>We should add a todo somewhere to limit the size of that title. After sluggification the document looks much nicer</p>
+<p><img alt="after sluggification" src="/images/posts/after-sluggification.png"></p>
+<p>Now let's get those articles into our blogging system in a decent way, and view them.</p>
+<h3>Some background</h3>
+<p>Getting all documents from the database is easy. We already do that. But getting exactly everything we want is a little harder, because we have to define some views to retrieve our posts.</p>
+<p>You provide CouchDB with view functions as strings stored inside the views field of a design document. You don’t run it yourself. Instead, when you query your view, CouchDB takes the source code and runs it for you on every document in the database your view was defined in. You query your view to retrieve the view result.</p>
+<p>The view we need for the article list only needs to hold two pieces of information to show a link to the article. We need the id so we can fetch an individual article and we need the title so we can show that instead of the id or slug. This is how you do that:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s1">&#39;post&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">title</span><span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>From all the documents in the database we are only interested in the ones of type <code>post</code>. We're emitting the document id and an object that holds the title. Head over to Fauxton again and create a new <code>design doc</code> calles <code>article_list</code> and create a view in it called <code>articleView</code></p>
+<p><img alt="Create a new articleView in a design doc" src="/images/posts/new-design-doc.png"></p>
+<p>This view can be fetched in almost exactly the same way as fetching the <code>article.list</code>-nano view. Only now we specify the view we have just created</p>
+<div class="highlight"><pre><span></span>  <span class="kd">var</span> <span class="nx">articlelist</span> <span class="o">=</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">articles</span><span class="p">.</span><span class="nx">view</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">articlelist</span><span class="p">(</span><span class="s1">&#39;article_list&#39;</span><span class="p">,</span> <span class="s1">&#39;articleView&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+
+
+<p>The <code>posts.html</code> to render now gets a list of objects we can loop through and all those objects have two elements, a <code>title</code> in a <code>value</code>-object and an <code>id</code> (or slug, which is the same in this case). The mustache for this loop looks like this</p>
+<div class="highlight"><pre><span></span>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    {{ &quot;{{ #postlist &quot;}}}}
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/posts/{{ &quot;</span><span class="err">{{</span> <span class="na">id</span> <span class="err">&quot;}}}}&quot;</span><span class="p">&gt;</span>{{ &quot;{{ value.title &quot;}}}}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+    {{ &quot;{{ #postlist &quot;}}}}
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>And there it is (we definately have to fix those titles in our lazy blogpost generator, btw):</p>
+<p><img alt="Article view rendered" src="/images/posts/the-article-view-in-action.png"></p>
+<p>The only trick left here is to create the route we end the user to when he clicks on this generated link:</p>
+<div class="highlight"><pre><span></span><span class="o">/</span><span class="n">posts</span><span class="o">/</span><span class="p">[</span><span class="n">some</span> <span class="n">slug</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This is handled by another route with an parameter in it. This time it is the slug, and we use that slug to fetch the article. Later on we can make a view for the post and return more data, like comments, but for now this is enough.</p>
+<div class="highlight"><pre><span></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts/:slug&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">articles</span> <span class="o">=</span> <span class="nx">nano</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">articlelist</span> <span class="o">=</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">articles</span><span class="p">.</span><span class="nx">get</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">articlelist</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">slug</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">viewEngine</span><span class="p">.</span><span class="nx">respond</span><span class="p">(</span><span class="s1">&#39;post.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">locals</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+        <span class="nx">body</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">body</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+<span class="p">});</span>
+</pre></div>
+
+
+<p>We render the post in a template called post.html</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">article</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ &quot;{{ title &quot;}}}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+  {{ &quot;{{ body &quot;}}}}
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>And that's it. We have a blog, suited for lazy bloggers, that does it all. Read, write, render and eh ... nothing more. Whatever. This is pretty cool as it is. We'll go into <a href="https://github.com/tuvokki/bogart-blog/releases/tag/v1.0.0">release 1.0.0</a> and see what change requests come in. Let's pick a cool name for our release from <a href="http://www.thenervousbreakdown.com/sbeaudoin/2010/05/22-worst-band-names/">this list</a> and tag it. As ever, download or checkout the result of this post in the tagged <a href="https://github.com/tuvokki/bogart-blog/tree/v1.0.0">github repo of the bogart-blog</a>.</p>
+</div>
+		</div>
+	</body>
+</html>

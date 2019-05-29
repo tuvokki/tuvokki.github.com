@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>What are Git?</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://tuvokki.github.io/images/wouter-krijt.png">
+					What are Git?
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="mailto:tuvokki@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			<a class="sidebar-nav-item" href="https://github.com/tuvokki">
+				<i class="fa fa-github"></i>
+			</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Lets-make-blogs</h1>
+	<span class="post-date">Thu 28 May 2015</span>
+	<p>Its fun to make blogs. They have anything a developer can wish for, minus the complexity of a multilayered enterprise application with a lot of legacy code.</p>
+<p>Developers heaven consists of a data-layer with some cross references between entities, a server-component that CRUDs this data and spits out readable messages to a front-end in a modern, HTML5, coat making your user happy.</p>
+<p>And it always helps a lot if that user is ... you! Mainly because development takes place in yet another cool new framework and the end product is not intended for particular usage anywhere. So, what are we waiting for? Go, go, go!</p>
+<h2>Bogart</h2>
+<p>Bogart is a fast, Sinatra-Inspired JavaScript Framework running on JSGI with Node.JS! If that is not enough to convince you to start using it, routing in Bogart is simple and intuitive. A route is an HTTP method paired with an URL matching pattern and a handler function. It also handles redirects, CORS headers and file streaming. In this series of blogs we'll see if this promising framework can live up to its expectations.</p>
+<h2>CouchDB</h2>
+<p>CouchDB is a database that completely embraces the web. Store your data with JSON documents. Access your documents and query your indexes with your web browser, via HTTP. Index, combine, and transform your documents with JavaScript. CouchDB works well with modern web and mobile apps. You can even serve web apps directly out of CouchDB. And you can distribute your data, or your apps, efficiently using CouchDB’s incremental replication. CouchDB supports master-master setups with automatic conflict detection.</p>
+<p>I mean, that would make a ...</p>
+<h2>Lovely combination</h2>
+<p>To start this we'll have to do two things. Create a repo to dump this in. So, head over to your <a href="https://github.com">github</a> account and create a new repo. I called mine <a href="https://github.com/tuvokki/bogart-blog">bogart-blog</a>. Let's check it out:</p>
+<div class="highlight"><pre><span></span>% <span class="nb">cd</span> development/projects
+
+% git clone git@github.com:tuvokki/bogart-blog.git
+    Cloning into <span class="s1">&#39;bogart-blog&#39;</span>...
+    warning: You appear to have cloned an empty repository.
+
+% <span class="nb">cd</span> bogart-blog 
+</pre></div>
+
+
+<p>Now, we can make a project:</p>
+<div class="highlight"><pre><span></span>% npm init
+</pre></div>
+
+
+<p>This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.</p>
+<p>See <code>npm help json</code> for definitive documentation on these fields
+and exactly what they do.</p>
+<p>Use <code>npm install &lt;pkg&gt; --save</code> afterwards to install a package and
+save it as a dependency in the package.json file.</p>
+<div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">bogart</span><span class="o">-</span><span class="n">blog</span><span class="p">)</span> 
+<span class="k">version</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">A</span> <span class="n">blog</span> <span class="n">created</span> <span class="k">with</span> <span class="n">bogart</span> <span class="k">and</span> <span class="n">couchdb</span>
+<span class="n">entry</span> <span class="n">point</span><span class="p">:</span> <span class="p">(</span><span class="k">index</span><span class="p">.</span><span class="n">js</span><span class="p">)</span> <span class="n">app</span><span class="p">.</span><span class="n">js</span>
+<span class="n">test</span> <span class="n">command</span><span class="p">:</span> <span class="n">mocha</span>
+<span class="n">git</span> <span class="n">repository</span><span class="p">:</span> <span class="p">(</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">tuvokki</span><span class="o">/</span><span class="n">bogart</span><span class="o">-</span><span class="n">blog</span><span class="p">.</span><span class="n">git</span><span class="p">)</span> 
+<span class="n">keywords</span><span class="p">:</span> <span class="n">bogart</span><span class="p">,</span> <span class="n">blog</span><span class="p">,</span> <span class="n">couchdb</span>
+<span class="n">author</span><span class="p">:</span> <span class="n">Wouter</span> <span class="n">Roosendaal</span>
+<span class="n">license</span><span class="p">:</span> <span class="p">(</span><span class="n">ISC</span><span class="p">)</span> <span class="n">MIT</span>
+<span class="p">...</span>
+
+<span class="k">Is</span> <span class="n">this</span> <span class="n">ok</span><span class="o">?</span> <span class="p">(</span><span class="n">yes</span><span class="p">)</span> <span class="n">yes</span>
+</pre></div>
+
+
+<p>Tuck in a readme <code>echo "My bogart blog with CouchDB" &gt; README.md</code> et voila. 
+Install the prerequisites we've been talking about:</p>
+<div class="highlight"><pre><span></span>npm install --save bogart
+npm install --save couchdb
+</pre></div>
+
+
+<p>This is the clean slate we're building on. So we'll do a <code>git add .</code> and a <code>git commit -a -m 'initial commit'</code> to baseline this stuff.</p>
+<p>See the resulting <a href="https://github.com/tuvokki/bogart-blog/blob/part1/package.json">package.json</a> in the repo I just created. </p>
+<p>And on this baseline we'll build a simple system. </p>
+<blockquote>
+<p>Any intelligent fool can make things bigger and more complex... It
+takes a touch of genius - and a lot of courage to move in the opposite
+direction.
+ - E. F. Schumacher</p>
+</blockquote>
+<h2>The components</h2>
+<p>Our blog application will only support CRUD methods:</p>
+<ul>
+<li>Create a new post <code>(POST /posts)</code></li>
+<li>Show a list of all the posts <code>(GET
+   /posts)</code></li>
+<li>Show a single post <code>(GET /posts/:id)</code></li>
+<li>Comment on a post <code>(POST
+   /posts/:id/comments)</code></li>
+</ul>
+<p>Let's start with a basic layout for our application. By convention, Bogart's view engine uses a file called layout.html as the layout if it exists. A Bogart layout is a template with a {{{body}}} tag to include the view inside of the layout. Make a folder called <code>views</code> in the main folder of the projects and create layout.html</p>
+<p>{% highlight html %}
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</p>
+<p _="%" endhighlight><html>
+<head>
+  <title>{{ "{{ title "}}}}</title>
+</head>
+<body>
+  {{ "{{{ body "}}}}}
+</body>
+</html></p>
+<p>Next up is the basics of our webserver. Bogart has routing, as I already told before, so lets use it for something that works, and forget about this HTML above.</p>
+<p>{% highlight javascript %}
+var bogart = require('bogart');</p>
+<p>var router = bogart.router();
+router.get('/', function(req) { 
+      return "hello world"; 
+});</p>
+<p>router.get('/:name', function(req) {
+      return 'hello '+req.params.name;
+});</p>
+<p>var app = bogart.app();
+app.use(bogart.batteries({ secret: 'xGljGo7f4g/a1QveU8VRxhZP5Hwi2YWelejBq5h4ynM'})); // A batteries included JSGI stack including streaming request body parsing, session, flash, and much more.
+app.use(router); // Our router</p>
+<p _="%" endhighlight>app.start(9981);</p>
+<p>This will start a server on port <code>9981</code>:</p>
+<div class="highlight"><pre><span></span>% nodemon app.js 
+<span class="m">29</span> May <span class="m">22</span>:36:38 - <span class="o">[</span>nodemon<span class="o">]</span> v1.2.1
+<span class="m">29</span> May <span class="m">22</span>:36:38 - <span class="o">[</span>nodemon<span class="o">]</span> to restart at any time, enter <span class="sb">`</span>rs<span class="sb">`</span>
+<span class="m">29</span> May <span class="m">22</span>:36:38 - <span class="o">[</span>nodemon<span class="o">]</span> watching: *.*
+<span class="m">29</span> May <span class="m">22</span>:36:38 - <span class="o">[</span>nodemon<span class="o">]</span> starting <span class="sb">`</span>node app.js<span class="sb">`</span>
+util.puts: Use console.log instead
+Server running on port <span class="m">9981</span>
+</pre></div>
+
+
+<p>We can open this in our browser <a href="http://localhost:9981/">http://localhost:9981/</a> to see what happens. And guess what? We, and the whole world with us, is welcomed. Do you feel that? To make it special add a name <a href="http://localhost:9981/tuvokki">http://localhost:9981/tuvokki</a> in the mix.</p>
+<p>Adding the following will make our system ready for the layout we just created.</p>
+<p _="%" endhighlight>{% highlight javascript %}
+var viewEngine = bogart.viewEngine('mustache', path.join(bogart.maindir(), 'views'));</p>
+<p>Ps. don't forget to add a reference to the path module in your app.js and change the <code>/</code> route to use our view</p>
+<p _="%" endhighlight>{% highlight javascript %}
+router.get('/', function(req, res) {
+  return viewEngine.respond('index.html', { locals: { description: 'This is content' } });
+});</p>
+<p>And all we have to do is add an index to render it all. Save index.html in the view folder, and make it render the description ('this is content') we pass into it</p>
+<p _="%" endhighlight>{% highlight html %}
+<p>
+{{ "{{ description "}}}}
+</p></p>
+<p>Now check <a href="http://localhost:9981/">http://localhost:9981/</a> again and voila, there we have a HTML5 powered message coming from our back-end. The only thing left is hook up this CouchDB and we have a blog. But that's work left for <a href="{% post_url 2015-06-01-Lets-make-more-blogs %}">part two of this series</a>.</p>
+<p>Checkout <a href="https://github.com/tuvokki/bogart-blog/tree/part1">the code tagged part1</a> and play with it, or download <a href="https://github.com/tuvokki/bogart-blog/releases/tag/part1">the 'part 1' release</a>.</p>
+</div>
+		</div>
+	</body>
+</html>

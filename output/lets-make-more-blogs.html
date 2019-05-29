@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>What are Git?</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://tuvokki.github.io/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://tuvokki.github.io/images/wouter-krijt.png">
+					What are Git?
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="mailto:tuvokki@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			<a class="sidebar-nav-item" href="https://github.com/tuvokki">
+				<i class="fa fa-github"></i>
+			</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Lets-make-more-blogs</h1>
+	<span class="post-date">Mon 01 June 2015</span>
+	<p>This is part 2 of a series of blogs about blogs. In <a href="{% post_url 2015-05-28-Lets-make-blogs %}">part one</a> we created a simple webserver with <a href="https://github.com/nrstott/bogart">bogart</a> and did some bogus routing to get it all set up. Now it's time to add some functionality!</p>
+<h2>Eye-candy</h2>
+<p>I started early today so I have already did some work before you finally arrived. Since it is not really on-topic, I added a very basic styling to the layout of the page. This was not free, and it touches the webserver, so I'll quickly go through it.</p>
+<p>Firstly I added a directory for static stuff. As you might remember, the views are rendered, but not all what we make needs to be processed. For static files bogart supplies us with static directory middleware. Two simple steps are needed, see <a href="https://github.com/nrstott/bogart/blob/master/examples/static-server/app.js">the example</a>. First create a reference to the designated directory</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&quot;public&quot;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>then use this in the <code>bogart.middleware.directory</code> middleware</p>
+<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bogart</span><span class="p">.</span><span class="nx">middleware</span><span class="p">.</span><span class="nx">directory</span><span class="p">(</span><span class="nx">root</span><span class="p">));</span>
+</pre></div>
+
+
+<p>and, of course, create the directory itself.</p>
+<p>The directory should look something like this now:</p>
+<p><img alt="Dirlisting of our project" src="/images/posts/Lets-make-more-blogs-dirlist.png"></p>
+<p>In this <code>public</code>-folder we can put all stuff that needs to be in or site, but needs not be processed. Like css. So we'll create a css subfolder in it and a nice stylesheet called <code>site.css</code> (just grab it from here <a href="https://github.com/tuvokki/bogart-blog/blob/part2/public/css/site.css">site.css</a>), and add it in the head of our <code>layout.html</code> like this</p>
+<div class="highlight"><pre><span></span>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;http://fonts.googleapis.com/css?family=Open+Sans&#39;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#39;text/css&#39;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/css/site.css&quot;</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<h2>Where's the data?</h2>
+<p>At this point we still have nothing even remotely resembling a blog. So lets update the <code>index.html</code> view to something that looks more like a post. Typically a post has a title and a blob, and maybe a date, author and a category and a tag, and comments eh .... start simple with a title and a body.</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">article</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ &quot;{{ title &quot;}}}}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+  {{ &quot;{{{ body &quot;}}}}}
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>In <code>app.js</code> we'll have to match the mustaches required here</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">article</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">locals</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;header title&quot;</span><span class="p">,</span> <span class="nx">body</span><span class="o">:</span> <span class="s2">&quot;A body that consists of a lot of things.&quot;</span> <span class="p">}</span> <span class="p">};</span>
+</pre></div>
+
+
+<p>But that's no data! We must hook up the couchdb. There are two routes that we will need in order to create a post.</p>
+<ul>
+<li><code>GET /posts/new</code> -&gt; returns a form to create a new post</li>
+<li><code>POST /posts</code> -&gt; creates a new post from the form parameters provided</li>
+</ul>
+<p>Save the mustache template to <code>views/new-post.html</code> and add the code to create a new post as follows</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">section</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;articlenew&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ &quot;{{ title &quot;}}}}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#39;post&#39;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#39;/posts&#39;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;articleform&#39;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>New Post<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#39;title&#39;</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&#39;title&#39;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#39;body&#39;</span><span class="p">&gt;</span>Body<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">name</span><span class="o">=</span><span class="s">&#39;body&#39;</span> <span class="na">rows</span><span class="o">=</span><span class="s">&#39;30&#39;</span> <span class="na">columns</span><span class="o">=</span><span class="s">&#39;125&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;buttons&#39;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Save<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Cancel<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>And for this form we'll make a route</p>
+<div class="highlight"><pre><span></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts/new&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">viewEngine</span><span class="p">.</span><span class="nx">respond</span><span class="p">(</span><span class="s1">&#39;new-post.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">locals</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;add some content&#39;</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>this will render the new-post-form which posts to the <code>/posts</code> route. All we need is something to listen to this. It's time to set up the couchdb. Head over to a <a href="https://www.smileupps.com/">free CouchDB host of your own choice</a> and create an instance. Remember the url of the instance and add a requirement to the couch in <code>app.js</code>. To do so head over to <a href="https://github.com/dscape/nano">nano</a> and/or install via npm</p>
+<div class="highlight"><pre><span></span>npm install --save nano
+</pre></div>
+
+
+<p>require it</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">nano</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;nano&#39;</span><span class="p">)(</span><span class="s1">&#39;https://[your-couchdb-instance].smileupps.com&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>to create a new database you can use the nano to do it programatically:</p>
+<div class="highlight"><pre><span></span><span class="nx">nano</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>but I have done this already in <code>https://[your-couchdb-instance].smileupps.com/_utils/fauxton/</code> (just add <code>/_utils/fauxton/</code> to the base url of your CouchDB instance). Head over there and create a database and paste in the name to use it:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">articles</span> <span class="o">=</span> <span class="nx">nano</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>As you can see the new article form does a <code>POST</code>-request to a route called <code>/posts</code> which handles the incoming data. Let's assume that it is all correct and verified by a much more modern frontend than we have here.
+The full <code>POST</code> route looks something like this</p>
+<div class="highlight"><pre><span></span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;post&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">articles</span> <span class="o">=</span> <span class="nx">nano</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">insert_article</span> <span class="o">=</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">articles</span><span class="p">.</span><span class="nx">insert</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">insert_article</span><span class="p">(</span><span class="nx">post</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;you have inserted the body: &#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>It will insert your post in the articles database and redirect your user to the /posts url. Which does not exist yet.</p>
+<p>The posts-router fetches the articles and passes them to the view, quite straight forward</p>
+<div class="highlight"><pre><span></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">articles</span> <span class="o">=</span> <span class="nx">nano</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">readlist</span> <span class="o">=</span> <span class="nx">bogart</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">articles</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">readlist</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">viewEngine</span><span class="p">.</span><span class="nx">respond</span><span class="p">(</span><span class="s1">&#39;posts.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">locals</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;all posts&#39;</span><span class="p">,</span>
+        <span class="nx">postlist</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">rows</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Next up the view. Lets see how this works. Create a file called <code>views/posts.html</code> and put the following in</p>
+<p>```html
+<section class="articlelist">
+  <title>{{ "{{ title "}}}}</title>
+  <p>
+    {{ "{{ #postlist "}}}}
+      {{ "{{id "}}}} - {{ "{{value "}}}}</br>
+    {{ "{{ /postlist "}}}}
+  </p>
+</section></p>
+<div class="highlight"><pre><span></span><span class="nv">this</span> <span class="nv">produces</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">output</span>
+
+<span class="o">!</span>[<span class="nv">image</span>]<span class="ss">(</span><span class="nv">https</span>:<span class="o">//</span><span class="nv">cloud</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">assets</span><span class="o">/</span><span class="mi">181719</span><span class="o">/</span><span class="mi">8032176</span><span class="o">/</span><span class="mi">643363</span><span class="nv">b4</span><span class="o">-</span><span class="mi">0</span><span class="nv">dd4</span><span class="o">-</span><span class="mi">11</span><span class="nv">e5</span><span class="o">-</span><span class="mi">8</span><span class="nv">fde</span><span class="o">-</span><span class="mi">0490</span><span class="nv">e1197733</span>.<span class="nv">png</span><span class="ss">)</span>
+
+<span class="nv">As</span> <span class="nv">you</span> <span class="nv">can</span> <span class="nv">see</span> <span class="nv">I</span> <span class="nv">have</span> <span class="nv">added</span> <span class="nv">some</span> <span class="nv">links</span> <span class="nv">to</span> <span class="nv">our</span> <span class="nv">routes</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">layout</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">page</span>, <span class="nv">but</span> <span class="nv">this</span> <span class="nv">output</span> <span class="nv">of</span> <span class="nv">our</span> <span class="nv">route</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">so</span> <span class="nv">nice</span>, <span class="nv">and</span> <span class="nv">definately</span> <span class="nv">no</span> <span class="nv">sigar</span> ... <span class="nv">but</span> <span class="nv">we</span><span class="s1">&#39;</span><span class="s">ve proven a point here.</span>
+<span class="k">If</span> <span class="nv">you</span> <span class="nv">look</span> <span class="nv">at</span> <span class="nv">the</span> <span class="nv">data</span> <span class="ss">(</span><span class="nv">see</span> <span class="nv">the</span> `<span class="nv">postlist</span>` <span class="nv">variable</span> <span class="nv">we</span> <span class="nv">passed</span> <span class="nv">to</span> <span class="nv">our</span> <span class="nv">view</span>: `<span class="nv">data</span>.<span class="nv">rows</span>`<span class="ss">)</span> <span class="nv">we</span> <span class="nv">can</span> <span class="nv">actually</span> <span class="nv">see</span> <span class="nv">that</span> <span class="nv">it</span> <span class="nv">is</span> <span class="nv">correct</span>
+</pre></div>
+
+
+<p>{ total_rows: 8,
+  offset: 0,
+  rows:
+   [ { id: '1ec1ba2efd99b08a296022a471000adc',
+       key: '1ec1ba2efd99b08a296022a471000adc',
+       value: [Object] },
+     { id: '1ec1ba2efd99b08a296022a471000e8f',
+       key: '1ec1ba2efd99b08a296022a471000e8f',
+       value: [Object] },
+     { id: '1ec1ba2efd99b08a296022a471001e83',
+       key: '1ec1ba2efd99b08a296022a471001e83',
+       value: [Object] },
+     { id: '1ec1ba2efd99b08a296022a471002a1a',
+       key: '1ec1ba2efd99b08a296022a471002a1a',
+       value: [Object] },
+     { id: '20ce1f108a8bdf2f19f04f42b0001211',
+       key: '20ce1f108a8bdf2f19f04f42b0001211',
+       value: [Object] },
+     { id: '20ce1f108a8bdf2f19f04f42b0001a04',
+       key: '20ce1f108a8bdf2f19f04f42b0001a04',
+       value: [Object] },
+     { id: '4621304957fe61369fabd57a10000b2a',
+       key: '4621304957fe61369fabd57a10000b2a',
+       value: [Object] },
+     { id: 'debc644610a205948ed3704105002661',
+       key: 'debc644610a205948ed3704105002661',
+       value: [Object] } ] }
+```</p>
+<p>You can check the ref-id's in your database and see what you have posted there. What we really want to know and what we need to access are those [Object]-objects. For that we need query the CouchDB a little more. And that's a nice topic for the <a href="{% post_url 2015-06-12-Short-intermezzo-for-lazy-bloggers %}">next article in this series</a>.</p>
+<p>The <a href="https://github.com/tuvokki/bogart-blog/releases/tag/part2">release after this article</a> is available, as well as the <a href="https://github.com/tuvokki/bogart-blog/tree/part2">tagged sourcecode in the github reppo for this blog</a>.</p>
+</div>
+		</div>
+	</body>
+</html>
